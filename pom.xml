@@ -11,7 +11,7 @@
     <groupId>com.ucc</groupId>
     <artifactId>chatbot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>chatbot</name>
     <description>UCC chatbot project</description>
 
