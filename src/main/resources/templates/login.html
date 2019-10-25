@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<script src="//widget.manychat.com/240407976349075.js" async="async"></script>
+
+<head>
+    <title>Log in</title>
+</head>
+<body>
+<div>
+            <div>Login Form</div>
+            <div>
+                <form name="loginform" th:action="@{/login}" action="login" method="post">
+                    <div>
+                        <input type="email"  name="username" placeholder="Email" />
+                    </div>
+                    <div>
+                        <input type="password"  name="password" placeholder="Password" />
+                    </div>
+
+                    <!--<div class="form-group">
+                        <label>
+                            <input type="checkbox" name="remember-me"> Remember Me
+                        </label>
+                    </div>-->
+                    <div>
+                        <div>
+                            <button type="submit">LogIn</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <div th:if="${param.error}">
+                                <p>
+                                    <span>Invalid Email or Password.</span>
+                                </p>
+                            </div>
+                            <div th:if="${param.logout}">
+                                <p>
+                                    <span>You have been logged out.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+</div>
+</body>
+</html>
