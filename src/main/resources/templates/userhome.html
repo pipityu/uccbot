@@ -12,7 +12,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{/js/datepicker.js}"></script>
-    <script src="//widget.manychat.com/240407976349075.js" async="async"></script>
+    <script>
+        var div = document.createElement('div');
+        div.className = 'fb-customerchat';
+        div.setAttribute('page_id', '105197630914532');
+        div.setAttribute('ref', '');
+        document.body.appendChild(div);
+        window.fbMessengerPlugins = window.fbMessengerPlugins || {
+            init: function () {
+                FB.init({
+                    appId            : '1678638095724206',
+                    autoLogAppEvents : true,
+                    xfbml            : true,
+                    version          : 'v3.3'
+                });
+            }, callable: []
+        };
+        window.fbAsyncInit = window.fbAsyncInit || function () {
+            window.fbMessengerPlugins.callable.forEach(function (item) { item(); });
+            window.fbMessengerPlugins.init();
+        };
+        setTimeout(function () {
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) { return; }
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        }, 0);
+    </script>
 </head>
 
 <body>
