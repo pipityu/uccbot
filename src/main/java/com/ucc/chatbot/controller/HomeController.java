@@ -4,6 +4,9 @@ package com.ucc.chatbot.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 public class HomeController {
 
@@ -16,6 +19,14 @@ public class HomeController {
     public String home() {
         return "userhome";
     }
+
+  /*  @CrossOrigin
+    @GetMapping("/info")
+    public String info(HttpServletResponse response){
+
+        response.addHeader();
+        return
+    }*/
 
     @GetMapping("/login")
     public String login() {

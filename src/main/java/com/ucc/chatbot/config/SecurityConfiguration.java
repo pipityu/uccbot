@@ -62,6 +62,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                // .headers().contentTypeOptions().disable()
               //  .frameOptions().sameOrigin()
+                .cors()
+                .and()
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/webjars/**","/assets/**").permitAll()
                 .antMatchers("/").permitAll()
@@ -92,7 +94,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
+        configuration.setExposedHeaders(Arrays.asList("x-auth-token"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
 }
 
