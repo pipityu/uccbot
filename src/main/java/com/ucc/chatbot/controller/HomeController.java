@@ -14,7 +14,6 @@ public class HomeController {
         return "index";
     }
 
-    @CrossOrigin(origins = "https://api.manychat.com")
     @GetMapping("/home")
     public String home(Model model) {
         return "userhome";
