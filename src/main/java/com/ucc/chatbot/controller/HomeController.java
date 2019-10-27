@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpRequest;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class HomeController {
 
