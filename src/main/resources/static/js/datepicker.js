@@ -4,7 +4,9 @@ function addDate() {
     xmlhttp.open("GET", "https://api.manychat.com/fb/page/getInfo", true);
     xmlhttp.setRequestHeader("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
     xmlhttp.setRequestHeader("accept", "application/json");
-    xmlhttp.onreadystatechange = function () {
+    xmlhttp.setRequestHeader("Content-type", "application/json");
+
+        xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           //  var myObj = JSON.parse(this.responseText);
           //  document.getElementById("leker").innerHTML = myObj.first_name;
