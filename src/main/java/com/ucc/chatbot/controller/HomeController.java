@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@CrossOrigin(origins = "http://localhost:8080")
 public class HomeController {
 
     @GetMapping("/")

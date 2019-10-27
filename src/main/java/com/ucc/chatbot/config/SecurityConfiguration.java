@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired //configureGlobal
+    @Autowired //configureGlobal// itt használom a myUserDetailService-met
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .userDetailsService(myUserDetailsService)

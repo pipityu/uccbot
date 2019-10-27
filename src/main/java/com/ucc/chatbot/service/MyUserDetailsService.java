@@ -24,7 +24,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     //itt felülírjuk a UserDetailsService egyetlen metódusát. Ha nincs meg a user akkor exception
     // ha megvan akkor visszatér az emaillel passwordel és szerepkörökkel
-    @Override
+    @Override//felhasználók kikeresésének a módja
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("Email: " + userName + " not found"));
