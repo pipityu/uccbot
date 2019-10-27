@@ -5,8 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 
-@Controller
+@CrossOrigin
+@RestController
 public class HomeController {
 
     @GetMapping("/")
@@ -15,7 +18,7 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home() {
         return "userhome";
     }
 
