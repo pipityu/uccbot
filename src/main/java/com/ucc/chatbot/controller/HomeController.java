@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeController {
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index() {
         return "index";
     }
 
