@@ -1,20 +1,19 @@
 function addDate() {
-/*
+
     var xmlhttp = new XMLHttpRequest();
-    xmlhttp.open("GET", "https://app.botsociety.io/apisociety/2.0/conversations/5db08a3e3c5eab5f7d58da88/messages/5da6dce86419f7722d038f42", true);
-    xmlhttp.setRequestHeader("user_id", "5da03a5496750f488b33afd2");
-    xmlhttp.setRequestHeader("api_key_public", "8af622394a4c631dffb38a7bc168d269");
+    xmlhttp.open("GET", "\"https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=3809668825726118", true);
+    xmlhttp.setRequestHeader("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.onload = function () {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
-            document.getElementById("leker").innerHTML = myObj.buttons.text;
+            document.getElementById("leker").innerHTML = myObj.first_name;
         }
     };
     xmlhttp.send();
- */
 
-        var startDate = $("#startDate").val();
+
+/*        var startDate = $("#startDate").val();
         var endDate =  $("#endDate").val();
         var requestType = $("input[name=radio]:checked", "#dateForm").val();
 
@@ -27,5 +26,5 @@ function addDate() {
                 $("#dateForm").attr("action","/feldolgoz");
                 alert(startDate);
              //   $("#dateForm").on("submit",function () { alert("okok"); });
-        }
+        }*/
 }
