@@ -1,14 +1,21 @@
 package com.ucc.chatbot.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @GetMapping("/")
     public String index() {
@@ -20,13 +27,13 @@ public class HomeController {
         return "userhome";
     }
 
-  /*  @CrossOrigin
-    @GetMapping("/info")
-    public String info(HttpServletResponse response){
+    @GetMapping(path = "/info", produces = "application/json")
+    public String getTodosJson() {
+        String theUrl = "https://jsonplaceholder.typicode.com/todos";
+        ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, null, String.class);
 
-        response.addHeader();
-        return
-    }*/
+        return response.getBody();
+    }
 
     @GetMapping("/login")
     public String login() {
