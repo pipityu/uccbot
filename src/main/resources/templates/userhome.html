@@ -2,9 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
-<!-- ManyChat -->
-<script src="//widget.manychat.com/105197630914532.js" async="async"></script>
+
 <head>
+
     <title>User Home</title>
     <meta charset="utf-8" />
 
@@ -13,6 +13,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{/js/datepicker.js}"></script>
+    <!-- ManyChat -->
+    <script src="//widget.manychat.com/105197630914532.js" async="async"></script>
 
 </head>
 
@@ -26,7 +28,7 @@
     <p>
         <a th:href="@{/logout}">Logout</a>
     </p>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
+    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
         <h3>You will see this only if you are ADMIN</h3>
         <p>
             <a href="/admin/home">Admin Home</a>
