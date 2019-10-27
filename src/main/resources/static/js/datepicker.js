@@ -4,7 +4,7 @@ function addDate() {
     xmlhttp.open("GET", "https://api.manychat.com/fb/page/getInfo", true);
     xmlhttp.setRequestHeader("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
     xmlhttp.setRequestHeader("Accept", "application/json");
-    xmlhttp.setRequestHeader("Content-type", "application/json");
+    xmlhttp.setRequestHeader("Content-Type", "application/json");
 
         xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
