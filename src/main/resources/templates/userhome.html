@@ -21,12 +21,12 @@
 <div id="leker"></div>
 <div>
     <p>
-        Welcome <span sec:authentication="principal.username">User</span>
+        Welcome <span sec:authentication="principal.authorities">User</span>
     </p>
     <p>
         <a th:href="@{/logout}">Logout</a>
     </p>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
+    <div sec:authorize access ="hasRole('ADMIN')">
         <h3>You will see this only if you are ADMIN</h3>
         <p>
             <a href="/admin/home">Admin Home</a>
