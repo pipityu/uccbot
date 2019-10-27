@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
 </head>
 <body>
-<div layout:fragment="content">
+<div>
 
-    <p><a href="/login">Login</a></p>
+    <p><a th:href="@{/login}">/<p>
 </div>
 </body>
 </html>
