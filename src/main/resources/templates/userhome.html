@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <!-- ManyChat -->
 <script src="//widget.manychat.com/105197630914532.js" async="async"></script>
 <head>
@@ -26,7 +26,7 @@
     <p>
         <a th:href="@{/logout}">Logout</a>
     </p>
-    <div sec:authorize access ="hasRole('ADMIN')">
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
         <h3>You will see this only if you are ADMIN</h3>
         <p>
             <a href="/admin/home">Admin Home</a>
