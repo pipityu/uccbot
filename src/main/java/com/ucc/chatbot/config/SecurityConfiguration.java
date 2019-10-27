@@ -62,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                // .headers().contentTypeOptions().disable()
               //  .frameOptions().sameOrigin()
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/webjars/**","/assets/**").permitAll()
                 .antMatchers("/").permitAll()
