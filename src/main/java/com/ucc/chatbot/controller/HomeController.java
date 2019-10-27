@@ -14,6 +14,7 @@ public class HomeController {
         return "index";
     }
 
+    @CrossOrigin(origins = "https://sampleucc.herokuapp.com")
     @GetMapping("/home")
     public String home(Model model) {
         return "userhome";
