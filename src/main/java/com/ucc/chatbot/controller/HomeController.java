@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.net.http.HttpRequest;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://api.manychat.com")
 @RestController
 public class HomeController {
 
@@ -24,7 +24,7 @@ public class HomeController {
 
     @GetMapping("/login")
     public String login(Model model) {
-        return "loginn";
+        return "login";
     }
 
     @GetMapping("/admin/home")
