@@ -6,9 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.http.HttpRequest;
 
-@CrossOrigin(origins = "https://api.manychat.com")
+@CrossOrigin(origins = "*")
 @RestController
 public class HomeController {
 
