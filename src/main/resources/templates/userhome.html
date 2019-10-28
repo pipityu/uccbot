@@ -58,7 +58,7 @@
 </div>
 
 <div>
-    <h3>Előkészített kérelem</h3><button class="btn" th:href="@{/request}">Frissítés</button>
+    <p>Előkészített kérelem</p><a th:href="@{/request}"><button class="btn">Frissítés</button></a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -79,6 +79,35 @@
                 <td th:text="${endDateValue}"></td>
                 <td th:text="${statusValue}"></td>
             </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <a th:href="@{/request(accept=1)}"><button class="btn">Kérelem küldése</button></a>
+</div>
+
+<div>
+    <p>Elküldött kérelem</p><a th:href="@{/}"><button class="btn">Frissítés</button></a>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Név</th>
+            <th>ID</th>
+            <th>Típus</th>
+            <th>Kezdeti nap</th>
+            <th>Utolsó nap</th>
+            <th>Státusz</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${name}"></td>
+            <td th:text="${id}"></td>
+            <td th:text="${choicevalue}"></td>
+            <td th:text="${startDateValue}"></td>
+            <td th:text="${endDateValue}"></td>
+            <td th:text="${statusValue}"></td>
+        </tr>
         </tbody>
     </table>
 </div>
