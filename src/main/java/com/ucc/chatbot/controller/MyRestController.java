@@ -23,6 +23,6 @@ public class MyRestController {
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
         JSONObject jobj = new JSONObject(response.getBody());
 
-        return jobj.getString("id");
+        return jobj.getString("status");
     }
 }
