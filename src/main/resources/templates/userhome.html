@@ -34,8 +34,11 @@
             <a href="/admin/home">Admin Home</a>
         </p>
     </div>
+    <tr th:each="attr : ${json}">
+        <td th:text="${attr}">1</td>
+    </tr>
     <div>
-        <a href="/info">Admin Home</a>
+        <a href="/info">info</a>
         <p>Itt van a messenger chatbot</p>
     </div>
    <!-- <form id="dateForm" name="dateForm">

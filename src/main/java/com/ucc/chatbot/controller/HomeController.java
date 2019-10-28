@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,14 +28,14 @@ public class HomeController {
     }
 
     @GetMapping(path = "/info", produces = "application/json")
-    public String infon() {
+    public String info(Model model) {
         String theUrl = "https://jsonplaceholder.typicode.com/todos";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
-
-        return response.getBody();
+        model.addAttribute("json", response.getBody());
+        return "userhome";
     }
 
     @GetMapping("/login")
