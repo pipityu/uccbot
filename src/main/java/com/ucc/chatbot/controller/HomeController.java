@@ -27,14 +27,15 @@ public class HomeController {
         headers.add("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
-        JSONObject jobj = new JSONObject(response.getBody());
-      //  JSONArray jarray = jobj.getJSONArray("custom_fields");
-        String obj = jobj.getJSONObject("data").getString("status");
+        JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
+        JSONObject jsonObj = fulljson.getJSONObject("data");
+        JSONArray jsonArr = jsonObj.getJSONArray("custom_fields"); //elvileg ez lenne az array[]
+      //  String obj = jobj.getJSONObject("data").getString("status");
 
      //   String name = jarray.getJSONObject(0).getString("name");
         //String value = jobj.getString("name");
 
-        return obj;
+        return jsonArr.getJSONObject(0).getString("name");
     }
 
     @GetMapping("/")
