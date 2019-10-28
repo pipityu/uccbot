@@ -28,7 +28,7 @@ public class HomeController {
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
         JSONObject jobj = new JSONObject(response.getBody());
-        JSONArray jarray = new JSONArray(jobj.getJSONArray("custom_fields"));
+        JSONArray jarray = jobj.getJSONArray("custom_fields");
 
         String name = jarray.getJSONObject(0).getString("name");
         //String value = jobj.getString("name");
