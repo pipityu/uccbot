@@ -11,9 +11,15 @@ function addDate() {
     };
     xmlhttp.send();*/
 
-   var resp = fetch('https://sampleucc.herokuapp.com/info',{redirect: "follow"});
-   var json = resp.json();
-    document.getElementById("leker").innerHTML = json.category;
+   var resp = fetch('https://api.manychat.com/fb/page/getInfo',{
+       method: "GET",
+        mode: "cors",
+       redirect: "follow",
+        headers: {"Content-Type":"application/json", "Authorization":"Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6"}
+
+   });
+   return resp.json();
+   // document.getElementById("leker").innerHTML = json.category;
 
 
 /*        var startDate = $("#startDate").val();

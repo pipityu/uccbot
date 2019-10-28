@@ -12,7 +12,7 @@ public class MyRestController {
 
     @Autowired
     RestTemplate restTemplate;
-
+/*
     @GetMapping(path = "/info")
     public String info() {
         String theUrl = "https://api.manychat.com/fb/page/getInfo";
@@ -22,5 +22,5 @@ public class MyRestController {
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
         return response.getBody();
-    }
+    }*/
 }
