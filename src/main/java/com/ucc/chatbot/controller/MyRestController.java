@@ -12,19 +12,5 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class MyRestController {
 
-    @Autowired
-    RestTemplate restTemplate;
-    @GetMapping(path = "/info")
-    public String info() {
-        String theUrl = "https://api.manychat.com/fb/page/getInfo";
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
-        JSONObject jobj = new JSONObject(response.getBody());
-        String status = jobj.getString("status");
 
-        return status;
-    }
 }
