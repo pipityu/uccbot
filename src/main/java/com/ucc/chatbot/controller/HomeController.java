@@ -31,7 +31,7 @@ public class HomeController {
       //  JSONArray jarray = jobj.getJSONArray("custom_fields");
         String obj = jobj.getJSONObject("data").getString("status");
 
-        String name = jarray.getJSONObject(0).getString("name");
+     //   String name = jarray.getJSONObject(0).getString("name");
         //String value = jobj.getString("name");
 
         return obj;
