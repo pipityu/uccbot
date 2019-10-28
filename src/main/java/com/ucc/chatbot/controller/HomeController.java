@@ -14,9 +14,6 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class HomeController {
 
-    @Autowired
-    RestTemplate restTemplate;
-
     @GetMapping("/")
     public String index() {
         return "index";
@@ -24,18 +21,6 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home() {
-        return "userhome";
-    }
-
-    @GetMapping(path = "/info", produces = "application/json")
-    public String info(Model model) {
-        String theUrl = "https://api.manychat.com/fb/page/getInfo";
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
-        model.addAttribute("json", response.getBody());
         return "userhome";
     }
 
