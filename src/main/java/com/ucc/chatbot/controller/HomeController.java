@@ -3,8 +3,7 @@ package com.ucc.chatbot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -28,9 +27,12 @@ public class HomeController {
     }
 
     @GetMapping(path = "/info", produces = "application/json")
-    public String getTodosJson() {
+    public String infon() {
         String theUrl = "https://jsonplaceholder.typicode.com/todos";
-        ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, null, String.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
 
         return response.getBody();
     }
