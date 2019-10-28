@@ -47,9 +47,11 @@
         </div>
     </nav>
 </div>
+<div>
     <p>
         Welcome <span sec:authentication="principal.username">User</span>
     </p>
+</div>
 <div sec:authorize="hasRole('ROLE_ADMIN')">
     <h3>You will see this only if you are ADMIN</h3>
     <p>
@@ -58,7 +60,7 @@
 </div>
 
 <div>
-    <p>Előkészített kérelem</p><a th:href="@{/request}"><button class="btn">Frissítés</button></a>
+    <p>Előkészített kérelem</p><a th:href="@{/request(accept=0)}"><button class="btn">Frissítés</button></a>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -110,10 +112,6 @@
         </tr>
         </tbody>
     </table>
-</div>
-    <p>
-        <a th:href="@{/logout}">Logout</a>
-    </p>
 </div>
 </body>
 </html>
