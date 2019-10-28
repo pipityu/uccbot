@@ -1,5 +1,6 @@
 package com.ucc.chatbot.controller;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -14,7 +15,7 @@ public class MyRestController {
     @Autowired
     RestTemplate restTemplate;
     @GetMapping(path = "/info")
-    public JSONObject info() {
+    public String info() {
         String theUrl = "https://api.manychat.com/fb/page/getInfo";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -22,6 +23,8 @@ public class MyRestController {
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
         JSONObject jobj = new JSONObject(response.getBody());
-        return jobj;
+
+
+        return jobj.getJSONObject("data").getString("id");
     }
 }
