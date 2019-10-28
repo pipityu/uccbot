@@ -41,14 +41,14 @@ public class HomeController {
         String id = jsonObj.getString("id");
 
 
-        String choiceName = jsonArr.getJSONObject(1).getString("name");
-        String choiceValue = jsonArr.getJSONObject(1).getString("value");
-        String startDateName = jsonArr.getJSONObject(2).getString("name");
-        String startDateValue = jsonArr.getJSONObject(2).getString("value");
-        String endDateName = jsonArr.getJSONObject(0).getString("name");
-        String endDateValue = jsonArr.getJSONObject(0).getString("value");
-        String statusName = jsonArr.getJSONObject(3).getString("name");
-        String statusValue = jsonArr.getJSONObject(3).getString("value");
+        String choiceName = jsonArr.getJSONObject(2).getString("name");
+        String choiceValue = jsonArr.getJSONObject(2).getString("value");
+        String startDateName = jsonArr.getJSONObject(3).getString("name");
+        String startDateValue = jsonArr.getJSONObject(3).getString("value");
+        String endDateName = jsonArr.getJSONObject(1).getString("name");
+        String endDateValue = jsonArr.getJSONObject(1).getString("value");
+        String statusName = jsonArr.getJSONObject(0).getString("name");
+        String statusValue = jsonArr.getJSONObject(0).getString("value");
 
         model.addAttribute("name", firstName+" "+lastName);
         model.addAttribute("id", id);
