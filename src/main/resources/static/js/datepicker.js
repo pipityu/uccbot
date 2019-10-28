@@ -11,7 +11,7 @@ function addDate() {
     };
     xmlhttp.send();*/
 
-   var resp = fetch('https://sampleucc.herokuapp.com/info');
+   var resp = fetch('https://sampleucc.herokuapp.com/info',{redirect: "follow"});
    var json = resp.json();
     document.getElementById("leker").innerHTML = json.category;
 
