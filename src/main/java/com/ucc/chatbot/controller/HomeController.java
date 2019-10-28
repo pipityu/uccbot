@@ -20,7 +20,7 @@ public class HomeController {
     RestTemplate restTemplate;
 
     @GetMapping(path = "/request")
-    public String request(Model model, String accept) {
+    public String request(Model model, int accept) {
         String theUrl = "https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=3809668825726118";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -62,7 +62,7 @@ public class HomeController {
         model.addAttribute("statusName", statusName);
         model.addAttribute("statusValue", statusValue);
 
-        if(accept == "1"){
+        if(accept == 1){
             //feltölt DB-be (Service)
             return "ok";
         }
