@@ -13,7 +13,7 @@ public class MyRestController {
     @Autowired
     RestTemplate restTemplate;
 
-    @GetMapping(path = "/info", produces = "application/json")
+    @GetMapping(path = "/info")
     public String info() {
         String theUrl = "https://api.manychat.com/fb/page/getInfo";
         HttpHeaders headers = new HttpHeaders();
