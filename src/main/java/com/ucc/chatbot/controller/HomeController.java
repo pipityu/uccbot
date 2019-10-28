@@ -32,21 +32,35 @@ public class HomeController {
         JSONObject jsonObj = fulljson.getJSONObject("data"); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonObj.getJSONArray("custom_fields"); //ez lenne az array[]
 
-      /*  for(int i = 0; i < 3; i++){
-            model.addAttribute(jsonArr.getJSONObject(i).getString("name"));
-            jsonArr.getJSONObject(i).getString("value");
+        /*for(int i = 0; i < 3; i++){
+            model.addAttribute("attrName"+i, jsonArr.getJSONObject(i).getString("name"));
+            model.addAttribute("attrValue"+i, jsonArr.getJSONObject(i).getString("value"));
         }*/
+        String firstName = jsonObj.getString("first_name");
+        String lastName = jsonObj.getString("last_name");
+        String id = jsonObj.getString("id");
 
-        int choice = 0;
-        int startDate = 1;
-        int endDate = 2;
-        String choiceName = jsonArr.getJSONObject(choice).getString("name");
-        String choiceValue = jsonArr.getJSONObject(choice).getString("value");
-        String startDateName = jsonArr.getJSONObject(startDate).getString("name");
-        String StartDateValue = jsonArr.getJSONObject(startDate).getString("value");
+
+        String choiceName = jsonArr.getJSONObject(1).getString("name");
+        String choiceValue = jsonArr.getJSONObject(1).getString("value");
+        String startDateName = jsonArr.getJSONObject(2).getString("name");
+        String startDateValue = jsonArr.getJSONObject(2).getString("value");
+        String endDateName = jsonArr.getJSONObject(0).getString("name");
+        String endDateValue = jsonArr.getJSONObject(0).getString("value");
+        String statusName = jsonArr.getJSONObject(3).getString("name");
+        String statusValue = jsonArr.getJSONObject(3).getString("value");
+
+        model.addAttribute("name", firstName+" "+lastName);
+        model.addAttribute("id", id);
 
         model.addAttribute("choicename", choiceName);
         model.addAttribute("choicevalue", choiceValue);
+        model.addAttribute("startDatename", startDateName);
+        model.addAttribute("startDateValue", startDateValue);
+        model.addAttribute("endDateName", endDateName);
+        model.addAttribute("endDateValue", endDateValue);
+        model.addAttribute("statusName", statusName);
+        model.addAttribute("statusValue", statusValue);
 
         return "userhome";
     }

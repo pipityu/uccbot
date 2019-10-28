@@ -50,47 +50,41 @@
     <p>
         Welcome <span sec:authentication="principal.username">User</span>
     </p>
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <h3>You will see this only if you are ADMIN</h3>
+    <p>
+        <a href="/admin/home">Admin Home</a>
+    </p>
+</div>
 
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th>name</th>
-        <th>picture</th>
-        <th>price</th>
-        <th>avaliable</th>
-    </tr>
-    </thead>
-    <tbody>
+<div>
+    <h3>Előkészített kérelem</h3><button class="btn" th:href="@{/request}"></button>
+    <table class="table table-hover">
+        <thead>
         <tr>
-            <td></td>
-            <td></td>
+            <th>Név</th>
+            <th>ID</th>
+            <th>Típus</th>
+            <th>Kezdeti nap</th>
+            <th>Utolsó nap</th>
+            <th>Státusz</th>
         </tr>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <tr>
+                <td th:text="${name}"></td>
+                <td th:text="${id}"></td>
+                <td th:text="${choicevalue}"></td>
+                <td th:text="${startDateValue}"></td>
+                <td th:text="${endDateValue}"></td>
+                <td th:text="${statusValue}"></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
     <p>
         <a th:href="@{/logout}">Logout</a>
     </p>
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <h3>You will see this only if you are ADMIN</h3>
-        <p>
-            <a href="/admin/home">Admin Home</a>
-        </p>
-    </div>
-    <div>
-        <a href="/request">info</a>
-        <p th:text="${choicename}"></p>
-        <p th:text="${choicevalue}"></p>
-    </div>
-   <!-- <form id="dateForm" name="dateForm">
-            <label>Kezdeti nap</label><input id="startDate" type="date">
-            <label>Utolsó nap</label><input id="endDate" type="date">
-            <input type="radio" name="radio" value="leave">Szabadság
-            <input type="radio" name="radio" value="sickpay">Táppénz
-            <button id="dateBtn" onclick="addDate()">Küldés</button>
-            <div id="invalidDate"></div>
-        </form>
-    </div>-->
 </div>
 </body>
 </html>
