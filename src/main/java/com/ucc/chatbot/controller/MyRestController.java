@@ -23,8 +23,9 @@ public class MyRestController {
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
         JSONObject jobj = new JSONObject(response.getBody());
+
         JSONObject data = new JSONObject(jobj.getJSONObject("data"));
 
-        return data.getString("name");
+        return response.getBody();
     }
 }
