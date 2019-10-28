@@ -1,15 +1,19 @@
 function addDate() {
 
-    var xmlhttp = new XMLHttpRequest();
+   /* var xmlhttp = new XMLHttpRequest();
     xmlhttp.open("GET", "https://sampleucc.herokuapp.com/info", true);
         xmlhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var myObj = JSON.parse(this.responseText);
-            document.getElementById("leker").innerHTML = myObj.first_name;
+            document.getElementById("leker").innerHTML = myObj.category;
             alert("ide jutott");
         }
     };
-    xmlhttp.send();
+    xmlhttp.send();*/
+
+   var resp = fetch('https://sampleucc.herokuapp.com/info');
+   var json = resp.json();
+    document.getElementById("leker").innerHTML = json.category;
 
 
 /*        var startDate = $("#startDate").val();
