@@ -27,15 +27,28 @@ public class HomeController {
         headers.add("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
+
         JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
-        JSONObject jsonObj = fulljson.getJSONObject("data");
-        JSONArray jsonArr = jsonObj.getJSONArray("custom_fields"); //elvileg ez lenne az array[]
-      //  String obj = jobj.getJSONObject("data").getString("status");
+        JSONObject jsonObj = fulljson.getJSONObject("data"); //data obj (amiben van ar array)
+        JSONArray jsonArr = jsonObj.getJSONArray("custom_fields"); //ez lenne az array[]
 
-     //   String name = jarray.getJSONObject(0).getString("name");
-        //String value = jobj.getString("name");
+      /*  for(int i = 0; i < 3; i++){
+            model.addAttribute(jsonArr.getJSONObject(i).getString("name"));
+            jsonArr.getJSONObject(i).getString("value");
+        }*/
 
-        return jsonArr.getJSONObject(0).getString("name");
+        int choice = 0;
+        int startDate = 1;
+        int endDate = 2;
+        String choiceName = jsonArr.getJSONObject(choice).getString("name");
+        String choiceValue = jsonArr.getJSONObject(choice).getString("value");
+        String startDateName = jsonArr.getJSONObject(startDate).getString("name");
+        String StartDateValue = jsonArr.getJSONObject(startDate).getString("value");
+
+        model.addAttribute("choicename", choiceName);
+        model.addAttribute("choicevalue", choiceValue);
+
+        return "userhome";
     }
 
     @GetMapping("/")
