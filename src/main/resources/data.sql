@@ -16,7 +16,7 @@ INSERT INTO roles (id, name) VALUES
 (2, 'ROLE_USER');
 
 INSERT INTO requests(id, name, type, start_date, end_date, status)  VALUES
-(1, 'user@user.com', 'szabadság', '2019-01-01', '2019-01-11', 'várakozás');
+(1, 'user@user.com', 'szabadság', '2019-01-01', '2019-01-11', 'várakozás'),
 (2, 'admin@admin.com', 'null', 'null', 'null', 'null');
 
 INSERT INTO users (id, email, password, name) VALUES
