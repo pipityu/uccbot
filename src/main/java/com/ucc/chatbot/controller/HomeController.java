@@ -1,6 +1,8 @@
 package com.ucc.chatbot.controller;
 
 
+import com.ucc.chatbot.model.Request;
+import com.ucc.chatbot.service.RequestService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class HomeController {
 
     @Autowired
     RestTemplate restTemplate;
+    @Autowired
+    RequestService reqservice;
 
     @GetMapping(path = "/request")
     public String request(Model model, int accept) {
@@ -40,30 +44,26 @@ public class HomeController {
         String lastName = jsonObj.getString("last_name");
         String id = jsonObj.getString("id");
 
-
-        String choiceName = jsonArr.getJSONObject(2).getString("name");
         String choiceValue = jsonArr.getJSONObject(2).getString("value");
-        String startDateName = jsonArr.getJSONObject(3).getString("name");
         String startDateValue = jsonArr.getJSONObject(3).getString("value");
-        String endDateName = jsonArr.getJSONObject(1).getString("name");
         String endDateValue = jsonArr.getJSONObject(1).getString("value");
-        String statusName = jsonArr.getJSONObject(0).getString("name");
         String statusValue = jsonArr.getJSONObject(0).getString("value");
+
+        Request request = new Request(firstName + " " + lastName, choiceValue, startDateValue, endDateValue, statusValue);
 
         model.addAttribute("name", firstName+" "+lastName);
         model.addAttribute("id", id);
 
-        model.addAttribute("choicename", choiceName);
         model.addAttribute("choicevalue", choiceValue);
-        model.addAttribute("startDatename", startDateName);
         model.addAttribute("startDateValue", startDateValue);
-        model.addAttribute("endDateName", endDateName);
         model.addAttribute("endDateValue", endDateValue);
-        model.addAttribute("statusName", statusName);
         model.addAttribute("statusValue", statusValue);
 
         if(accept == 1){
             //feltölt DB-be (Service)
+            reqservice.saveRequest(request);
+
+
             return "ok";
         }
 

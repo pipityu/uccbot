@@ -16,6 +16,14 @@ public class Request {
     private String end_date;
     private String status;
 
+    public Request(String name, String type, String start_date, String end_date, String status) {
+        this.name = name;
+        this.type = type;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.status = status;
+    }
+
     @OneToOne(mappedBy = "request")
     private User user;
 
