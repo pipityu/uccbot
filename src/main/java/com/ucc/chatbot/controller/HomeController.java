@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
 
 
 @Controller
@@ -60,11 +61,16 @@ public class HomeController {
         model.addAttribute("statusValue", statusValue);
 
         if(accept == 1){
-            //feltölt DB-be (Service)
-            reqservice.saveRequest(request);
+            List<Request> reqArr = reqservice.listAllRequest();
+            if(reqArr.size() > 0){
+                //Lekéri a meglévőt
+                return "leker";
 
-
-            return "ok";
+            }else{
+                //Elmenti a tervezetet
+                reqservice.saveRequest(request);
+                return "ment";
+            }
         }
 
         return "userhome";
