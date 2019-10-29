@@ -8,6 +8,7 @@ create table if not exists persistent_logins (
 delete from  user_role;
 delete from  roles;
 delete from  users;
+delete from  requests;
 
 INSERT INTO roles (id, name) VALUES
 (1, 'ROLE_ADMIN'),
