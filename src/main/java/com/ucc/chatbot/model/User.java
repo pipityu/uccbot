@@ -22,7 +22,7 @@ public class User {
     private List<Role> roles;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "request_id", referencedColumnName = "id")
+    @JoinColumn(unique = true)
     private Request request;
 
 
