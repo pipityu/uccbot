@@ -16,6 +16,8 @@ public class Request {
     private String end_date;
     private String status;
 
+    public Request(){}
+
     public Request(String name, String type, String start_date, String end_date, String status) {
         this.name = name;
         this.type = type;
