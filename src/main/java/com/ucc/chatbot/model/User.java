@@ -13,7 +13,6 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private String request_id;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
@@ -26,13 +25,6 @@ public class User {
     @JoinColumn(name = "request_id", referencedColumnName = "id")
     private Request request;
 
-    public String getRequest_id() {
-        return request_id;
-    }
-
-    public void setRequest_id(String request_id) {
-        this.request_id = request_id;
-    }
 
     public int getId() {
         return id;
