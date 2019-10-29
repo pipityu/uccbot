@@ -11,19 +11,22 @@ public class Request {
     private int id;
 
     private String name;
+    private String email;
     private String type;
     private String start_date;
     private String end_date;
     private String status;
 
+
     public Request(){}
 
-    public Request(String name, String type, String start_date, String end_date, String status) {
+    public Request(String name, String email, String type, String start_date, String end_date, String status) {
         this.name = name;
         this.type = type;
         this.start_date = start_date;
         this.end_date = end_date;
         this.status = status;
+        this.email = email;
     }
 
     @OneToOne(mappedBy = "request")

@@ -51,7 +51,8 @@ public class HomeController {
         String endDateValue = jsonArr.getJSONObject(1).getString("value");
         String statusValue = jsonArr.getJSONObject(0).getString("value");
 
-        Request request = new Request(firstName + " " + lastName, choiceValue, startDateValue, endDateValue, statusValue);
+        Request request = new Request(firstName + " " + lastName, principal.getName(),
+                choiceValue, startDateValue, endDateValue, statusValue);
 
         model.addAttribute("name", firstName+" "+lastName);
         model.addAttribute("id", id);
@@ -60,6 +61,7 @@ public class HomeController {
         model.addAttribute("startDateValue", startDateValue);
         model.addAttribute("endDateValue", endDateValue);
         model.addAttribute("statusValue", statusValue);
+        model.addAttribute("email", principal.getName());
 
         if(accept == 1){
             List<Request> reqArr = reqservice.listAllRequest();
