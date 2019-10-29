@@ -25,7 +25,7 @@ public class HomeController {
     RequestService reqservice;
 
     @GetMapping(path = "/request")
-    public String request(Model model, int accept) {
+    public String request(Model model, int accept, String email) {
         String theUrl = "https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=3809668825726118";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -37,10 +37,10 @@ public class HomeController {
         JSONObject jsonObj = fulljson.getJSONObject("data"); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonObj.getJSONArray("custom_fields"); //ez lenne az array[]
 
-        /*for(int i = 0; i < 3; i++){
-            model.addAttribute("attrName"+i, jsonArr.getJSONObject(i).getString("name"));
-            model.addAttribute("attrValue"+i, jsonArr.getJSONObject(i).getString("value"));
-        }*/
+
+
+
+
         String firstName = jsonObj.getString("first_name");
         String lastName = jsonObj.getString("last_name");
         String id = jsonObj.getString("id");
@@ -63,8 +63,9 @@ public class HomeController {
         if(accept == 1){
             List<Request> reqArr = reqservice.listAllRequest();
             if(reqArr.size() > 0){
-                //Lekéri a meglévőt
-                return "leker";
+                //PARAMÉTERKÉNT A FELHASZNÁLÓNEVET és az alapján lekéregetni
+                //ha admin akko mindet visszaadni, ha nem akk csak 1 et. ha nemtalál akkor a másik if
+                return email;
 
             }else{
                 //Elmenti a tervezetet
