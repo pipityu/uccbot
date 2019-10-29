@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -25,7 +26,7 @@ public class HomeController {
     RequestService reqservice;
 
     @GetMapping(path = "/request")
-    public String request(Model model, int accept, String email) {
+    public String request(Model model, int accept, Principal principal) {
         String theUrl = "https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=3809668825726118";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -65,7 +66,7 @@ public class HomeController {
             if(reqArr.size() > 0){
                 //PARAMÉTERKÉNT A FELHASZNÁLÓNEVET és az alapján lekéregetni
                 //ha admin akko mindet visszaadni, ha nem akk csak 1 et. ha nemtalál akkor a másik if
-                return email;
+                return principal.getName();
 
             }else{
                 //Elmenti a tervezetet
