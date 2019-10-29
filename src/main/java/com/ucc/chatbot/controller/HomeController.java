@@ -56,7 +56,6 @@ public class HomeController {
 
         model.addAttribute("name", firstName+" "+lastName);
         model.addAttribute("id", id);
-
         model.addAttribute("choicevalue", choiceValue);
         model.addAttribute("startDateValue", startDateValue);
         model.addAttribute("endDateValue", endDateValue);
