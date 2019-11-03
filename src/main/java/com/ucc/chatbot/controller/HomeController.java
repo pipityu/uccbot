@@ -89,7 +89,7 @@ public class HomeController {
 
         model.addAttribute("namee", name);
 
-        return "include:/userhome";
+        return "forward:/userhome";
     }
 
     @GetMapping("/checkrequest")
