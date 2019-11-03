@@ -34,8 +34,14 @@ public class HomeController {
         //principal.getName() -> username(email)
         //user.getName() -> Rendes Név
         User user = myUserDetailsService.loadUser(principal.getName());
-        String name = user.getName();
-        int admin = name.compareTo("Admin");
+      //  String name = (user.getName()=="Admin")?"Péter Nagy":user.getName(); //Admin a subscriberek között
+        String name = "";
+        boolean admin = false;
+        if (user.getName().compareTo("Admin") == 0){
+            name = "Péter Nagy";
+            admin = true;
+        }
+      //  int admin = name.compareTo("Admin");
 
         String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name="+name;
 
@@ -59,7 +65,7 @@ public class HomeController {
         String endDate = jsonArr.getJSONObject(0).getString("value");
         String status = jsonArr.getJSONObject(1).getString("value");
 
-        if(admin==0){
+        if(admin){
             List<Request> reqArr = reqservice.listAllRequest();
             model.addAttribute("allRequest", reqArr);
 
