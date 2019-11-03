@@ -94,7 +94,11 @@
                 <td th:text="${request.getStart_date()}"></td>
                 <td th:text="${request.getEnd_date()}"></td>
                 <td th:text="${request.getStatus()}"></td>
-                <div sec:authorize = "hasRole(ROLE_ADMIN)"><td><a th:href="@{/accept/${request.getId()}}"><button class="btn">Elfogad</button></a></td></div>
+                <td>
+                    <div sec:authorize = "hasRole(ROLE_ADMIN)">
+                        <a th:href="@{/accept(id=${request.getId})}"><button class="btn">Törlés</button></a>
+                    </div>
+                </td>
             </tr>
         </th:block>
         </tbody>
