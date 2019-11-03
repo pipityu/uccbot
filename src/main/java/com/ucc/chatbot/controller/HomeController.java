@@ -75,7 +75,7 @@ public class HomeController {
             model.addAttribute("allRequest", request);
         }
 
-        if(action.compareTo("save")==0) {
+        /*if(action.compareTo("save")==0) {
             if (admin) {
                 model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
             } else {
@@ -84,7 +84,7 @@ public class HomeController {
                     model.addAttribute("saved", "mentve");
                 }
             }
-        }
+        }*/
 
         model.addAttribute("namee", name);
 
