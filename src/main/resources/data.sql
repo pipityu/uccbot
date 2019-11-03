@@ -21,10 +21,11 @@ INSERT INTO requests(id, username, type, start_date, end_date, status, name)  VA
 
 INSERT INTO users (id, email, password, name) VALUES
 (1, 'admin@admin.com', '$2a$10$hKDVYxLefVHV/vtuPhWD3OigtRyOykRLDdUAp80Z1crSoS1lFqaFS', 'Admin'),
-(2, 'user@user.com', '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'Péter Nagy');
+(2, 'user@user.com', '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'Péter Nagy'),
+(3, 'user2@user.com', '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'Gergo Kis');
 
 insert into user_role(user_id, role_id) values
 (1,1),
 (1,2),
---(1,3),
-(2,2);
+(2,2),
+(3,2);
