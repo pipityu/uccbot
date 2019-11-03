@@ -47,13 +47,12 @@ public class HomeController {
 
         //Adatok kinyerése JSON-ból (data, custom_fields)
         JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
-       // JSONObject jsonObj = fulljson.getJSONObject("data"); //data obj (amiben van ar array)
-        JSONArray jsonArrData = fulljson.getJSONArray("data");
-        JSONArray jsonArr = jsonArrData.getJSONArray(23); //ez lenne az array[]
+        JSONArray jsonArrData = fulljson.getJSONArray("data"); //data obj (amiben van ar array)
+        JSONArray jsonArr = jsonArrData.getJSONArray(22); //ez lenne az array[]
 
-        String firstName = jsonArrData.getString(5);
-        String lastName = jsonArrData.getString(6);
-        String id = jsonArrData.getString(1);
+        String firstName = jsonArrData.getString(4);
+        String lastName = jsonArrData.getString(5);
+        String id = jsonArrData.getString(0);
         String choiceValue = jsonArr.getJSONObject(3).getString("value");
         String startDateValue = jsonArr.getJSONObject(2).getString("value");
         String endDateValue = jsonArr.getJSONObject(0).getString("value");
