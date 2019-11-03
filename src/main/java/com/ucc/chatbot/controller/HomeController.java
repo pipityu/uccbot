@@ -78,12 +78,14 @@ public class HomeController {
             if(admin){
                 model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
             } else {
+                Request request = new Request(principal.getName(), name, type, startDate, endDate, status);
                 if (reqservice.findRequestByUserName(principal.getName()) == null) {
-                    reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
-                    model.addAttribute("saved", "mentve");
+                    reqservice.saveRequest(request);
+                    model.addAttribute("saved", "Mentve");
                 }
                 else{
-                    model.addAttribute("saved", "felülírom");
+                    reqservice.updateRequest(request);
+                    model.addAttribute("saved", "Felülírva");
                 }
             }
 

@@ -25,4 +25,8 @@ public class RequestService {
         reqrepo.save(request);
     }
 
+    public void updateRequest(Request request){
+        reqrepo.updateRequest(request.getUsername(), request.getName(), request.getType(), request.getStart_date(), request.getEnd_date(), request.getStatus());;
+    }
+
 }
