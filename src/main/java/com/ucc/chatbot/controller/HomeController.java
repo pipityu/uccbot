@@ -50,15 +50,15 @@ public class HomeController {
         JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
 
-      /*  String firstName = jsonArrData.getString("first_name");
+        String firstName = jsonArrData.getString("first_name");
         String lastName = jsonArrData.getString("last_name");
-        String id = jsonArrData.getString("id");*/
+        String id = jsonArrData.getString("id");
         String choiceValue = jsonArr.getJSONObject(3).getString("value");
         String startDateValue = jsonArr.getJSONObject(2).getString("value");
         String endDateValue = jsonArr.getJSONObject(0).getString("value");
         String statusValue = jsonArr.getJSONObject(1).getString("value");
 
-        if(admin==1){
+        if(admin==0){
            /* model.addAttribute("name", "null");
             model.addAttribute("id", "null");
             model.addAttribute("choicevalue", "null");
@@ -84,7 +84,7 @@ public class HomeController {
         }
 
 
-
+        model.addAttribute("name", name);
 
         //Küldés Gombról érkezik
 /*            Request request = new Request(firstName + " " + lastName, name,
