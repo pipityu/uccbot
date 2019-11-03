@@ -81,6 +81,7 @@
                 <th>Kezdeti nap</th>
                 <th>Utolsó nap</th>
                 <th>Státusz</th>
+                <th>Válasz</th>
             </tr>
         </thead>
         <tbody>
@@ -93,6 +94,7 @@
                 <td th:text="${request.getStart_date()}"></td>
                 <td th:text="${request.getEnd_date()}"></td>
                 <td th:text="${request.getStatus()}"></td>
+                <div sec:authorize = "hasRole(ROLE_ADMIN)"><td><a th:href="@{/accept/${request.getId()}}"><button class="btn">Elfogad</button></a></td></div>
             </tr>
         </th:block>
         </tbody>

@@ -118,6 +118,12 @@ public class HomeController {
         return "userhome";
     }
 
+    @GetMapping("/accept")
+    public String accept(String username) {
+
+        return "forward:/checkrequest";
+    }
+
     @GetMapping("/")
     public String index() {
         return "index";
