@@ -82,11 +82,14 @@ public class HomeController {
                     reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
                     model.addAttribute("saved", "mentve");
                 }
+                else{
+                    model.addAttribute("saved", "felülírom");
+                }
             }
 
         model.addAttribute("namee", name);
 
-        return "userhome";
+        return "include:/userhome";
     }
 
     @GetMapping("/checkrequest")
