@@ -59,59 +59,42 @@
     </p>
 </div>
 
-<div>
-    <p>Előkészített kérelem</p><a th:href="@{/request(accept=0)}"><button class="btn">Frissítés</button></a>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Név</th>
-            <th>ID</th>
-            <th>Típus</th>
-            <th>Kezdeti nap</th>
-            <th>Utolsó nap</th>
-            <th>Státusz</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td th:text="${name}"></td>
-                <td th:text="${id}"></td>
-                <td th:text="${choicevalue}"></td>
-                <td th:text="${startDateValue}"></td>
-                <td th:text="${endDateValue}"></td>
-                <td th:text="${statusValue}"></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+
+<!-- ELŐKÉSZÍTETT KÉRELEM NEM KELL EZ ELÉG ÖSSZEGEZNI A CHATBOTBAN!!! -->
+<!-- ELÉG CSAK A DB-BŐL FRISSÍTENI A KÉRELMET!! STÁTUSZ ZÖLD PIROS -->
+
+<!--
 <div>
     <a th:href="@{/request(accept=1)}"><button class="btn">Kérelem küldése</button></a>
 </div>
+-->
 
 <div>
-    <p>Elküldött kérelem</p><a th:href="@{/}"><button class="btn">Frissítés</button></a>
+    <p>Kérelem</p><a th:href="@{/refresh}"><button class="btn">Frissítés</button></a>
     <table class="table table-hover">
         <thead>
-        <tr>
-            <th>Név</th>
-            <th>E-mail</th>
-            <th>ID</th>
-            <th>Típus</th>
-            <th>Kezdeti nap</th>
-            <th>Utolsó nap</th>
-            <th>Státusz</th>
-        </tr>
+            <tr>
+                <th>Név</th>
+                <th>E-mail</th>
+                <th>ID</th>
+                <th>Típus</th>
+                <th>Kezdeti nap</th>
+                <th>Utolsó nap</th>
+                <th>Státusz</th>
+            </tr>
         </thead>
         <tbody>
-        <tr>
-            <td th:text="${name}"></td>
-            <td th:text="${email}"></td>
-            <td th:text="${id}"></td>
-            <td th:text="${choicevalue}"></td>
-            <td th:text="${startDateValue}"></td>
-            <td th:text="${endDateValue}"></td>
-            <td th:text="${statusValue}"></td>
-        </tr>
+        <th:block th:each="request: ${allRequest}">
+            <tr>
+                <td th:text="${request.getId()}"></td>
+                <td th:text="${request.getName()}"></td>
+                <td th:text="${request.getType()}"></td>
+                <td th:text="${request.getStart_date()}"></td>
+                <td th:text="${request.getEnd_date()}"></td>
+                <td th:text="${request.getStatus()}"></td>
+                <td th:text="${request.getEmail()}"></td>
+            </tr>
+        </th:block>
         </tbody>
     </table>
 </div>

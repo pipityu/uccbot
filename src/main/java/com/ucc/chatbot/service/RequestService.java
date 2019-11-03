@@ -19,6 +19,8 @@ public class RequestService {
        return reqrepo.findAll();
     }
 
+    public Request findRequestByUserName(String username){return reqrepo.findByUserName(username);}
+
     public void saveRequest(Request request){
         reqrepo.save(request);
     }

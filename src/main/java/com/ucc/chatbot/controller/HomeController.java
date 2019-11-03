@@ -2,6 +2,8 @@ package com.ucc.chatbot.controller;
 
 
 import com.ucc.chatbot.model.Request;
+import com.ucc.chatbot.model.User;
+import com.ucc.chatbot.service.MyUserDetailsService;
 import com.ucc.chatbot.service.RequestService;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,60 +23,72 @@ import java.util.List;
 public class HomeController {
 
     @Autowired
+    private MyUserDetailsService myUserDetailsService;
+    @Autowired
     RestTemplate restTemplate;
     @Autowired
     RequestService reqservice;
 
     @GetMapping(path = "/request")
     public String request(Model model, int accept, Principal principal) {
-        String theUrl = "https://api.manychat.com/fb/subscriber/getInfo?subscriber_id=3809668825726118";
+
+        User user = myUserDetailsService.loadUser(principal.getName());
+        String name = user.getName();
+        int admin = name.compareTo("Admin");
+
+        String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name="+name;
+
+        //Header beállítása az azonosításhoz
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
 
+        //Adatok kinyerése JSON-ból (data, custom_fields)
         JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
         JSONObject jsonObj = fulljson.getJSONObject("data"); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonObj.getJSONArray("custom_fields"); //ez lenne az array[]
 
-
-
-
-
         String firstName = jsonObj.getString("first_name");
         String lastName = jsonObj.getString("last_name");
         String id = jsonObj.getString("id");
+        String choiceValue = jsonArr.getJSONObject(3).getString("value");
+        String startDateValue = jsonArr.getJSONObject(2).getString("value");
+        String endDateValue = jsonArr.getJSONObject(0).getString("value");
+        String statusValue = jsonArr.getJSONObject(1).getString("value");
 
-        String choiceValue = jsonArr.getJSONObject(2).getString("value");
-        String startDateValue = jsonArr.getJSONObject(3).getString("value");
-        String endDateValue = jsonArr.getJSONObject(1).getString("value");
-        String statusValue = jsonArr.getJSONObject(0).getString("value");
-
-        Request request = new Request(firstName + " " + lastName, principal.getName(),
-                choiceValue, startDateValue, endDateValue, statusValue);
-
-        model.addAttribute("name", firstName+" "+lastName);
-        model.addAttribute("id", id);
-        model.addAttribute("choicevalue", choiceValue);
-        model.addAttribute("startDateValue", startDateValue);
-        model.addAttribute("endDateValue", endDateValue);
-        model.addAttribute("statusValue", statusValue);
-        model.addAttribute("email", principal.getName());
-
-        if(accept == 1){
+        if(admin==1){
+           /* model.addAttribute("name", "null");
+            model.addAttribute("id", "null");
+            model.addAttribute("choicevalue", "null");
+            model.addAttribute("startDateValue", "null");
+            model.addAttribute("endDateValue", "null");
+            model.addAttribute("statusValue", "null");
+            model.addAttribute("email", "null");*/
             List<Request> reqArr = reqservice.listAllRequest();
-            if(reqArr.size() > 0){
-                //PARAMÉTERKÉNT A FELHASZNÁLÓNEVET és az alapján lekéregetni
-                //ha admin akko mindet visszaadni, ha nem akk csak 1 et. ha nemtalál akkor a másik if
-                return principal.getName();
+            model.addAttribute("allRequest", reqArr);
 
-            }else{
-                //Elmenti a tervezetet
-                reqservice.saveRequest(request);
-                return "ment";
-            }
+        }else{
+            //1DB request a felhasználónév alapján
+            Request request = reqservice.findRequestByUserName(principal.getName());
+            model.addAttribute("allRequest", request);
+            /*model.addAttribute("name", firstName+" "+lastName);
+            model.addAttribute("id", id);
+            model.addAttribute("choicevalue", choiceValue);
+            model.addAttribute("startDateValue", startDateValue);
+            model.addAttribute("endDateValue", endDateValue);
+            model.addAttribute("statusValue", statusValue);
+            model.addAttribute("email", principal.getName());
+            model.addAttribute("allRequest", "null");*/
         }
+
+
+
+
+        //Küldés Gombról érkezik
+/*            Request request = new Request(firstName + " " + lastName, name,
+                    choiceValue, startDateValue, endDateValue, statusValue);*/
 
         return "userhome";
     }

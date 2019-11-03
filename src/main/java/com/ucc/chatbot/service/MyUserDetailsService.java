@@ -39,4 +39,12 @@ public class MyUserDetailsService implements UserDetailsService {
         Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
         return authorities;
     }
+
+    public User loadUser(String userName) throws UsernameNotFoundException{
+        User user = userRepository.findByEmail(userName)
+                .orElseThrow(() -> new UsernameNotFoundException("Email: " + userName + " not found"));
+        return user;
+    }
+
+
 }
