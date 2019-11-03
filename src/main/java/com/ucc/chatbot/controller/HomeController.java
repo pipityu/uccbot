@@ -47,7 +47,7 @@ public class HomeController {
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
 
         //Adatok kinyerése JSON-ból (data, custom_fields)
-        JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
+        /*JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
         JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
 
@@ -57,7 +57,7 @@ public class HomeController {
         String type = jsonArr.getJSONObject(3).getString("value");
         String startDate = jsonArr.getJSONObject(2).getString("value");
         String endDate = jsonArr.getJSONObject(0).getString("value");
-        String status = jsonArr.getJSONObject(1).getString("value");
+        String status = jsonArr.getJSONObject(1).getString("value");*/
 
         if(admin==0){
             List<Request> reqArr = reqservice.listAllRequest();
@@ -69,11 +69,11 @@ public class HomeController {
             model.addAttribute("allRequest", request);
         }
 //email hibaaaaa
-        if(action == "save"){
+       /* if(action == "save"){
             if(reqservice.findRequestByUserName(principal.getName())==null)
             reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
             else return "buko";
-        }
+        }*/
         model.addAttribute("namee", name);
 
         //Küldés Gombról érkezik
