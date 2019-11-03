@@ -10,8 +10,8 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    private String username;
     private String name;
-    private String email;
     private String type;
     private String start_date;
     private String end_date;
@@ -20,13 +20,13 @@ public class Request {
 
     public Request(){}
 
-    public Request(String name, String email, String type, String start_date, String end_date, String status) {
+    public Request(String username, String name, String type, String start_date, String end_date, String status) {
+        this.username = username;
         this.name = name;
         this.type = type;
         this.start_date = start_date;
         this.end_date = end_date;
         this.status = status;
-        this.email = email;
     }
 
     @OneToOne(mappedBy = "request")
@@ -40,12 +40,12 @@ public class Request {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getType() {
@@ -88,11 +88,11 @@ public class Request {
         this.user = user;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setName(String name) {
+        this.name = name;
     }
 }

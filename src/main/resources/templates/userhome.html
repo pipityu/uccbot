@@ -74,9 +74,9 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>Név</th>
-                <th>E-mail</th>
                 <th>ID</th>
+                <th>Felhasználónév</th>
+                <th>Név</th>
                 <th>Típus</th>
                 <th>Kezdeti nap</th>
                 <th>Utolsó nap</th>
@@ -87,17 +87,16 @@
         <th:block th:each="request: ${allRequest}">
             <tr>
                 <td th:text="${request.getId()}"></td>
+                <td th:text="${request.getUsername()}"></td>
                 <td th:text="${request.getName()}"></td>
                 <td th:text="${request.getType()}"></td>
                 <td th:text="${request.getStart_date()}"></td>
                 <td th:text="${request.getEnd_date()}"></td>
                 <td th:text="${request.getStatus()}"></td>
-                <td th:text="${request.getEmail()}"></td>
             </tr>
         </th:block>
         </tbody>
     </table>
-    <p th:text="${nameee}"></p>
 </div>
 </body>
 </html>

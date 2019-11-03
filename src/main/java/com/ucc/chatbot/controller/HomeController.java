@@ -30,13 +30,14 @@ public class HomeController {
     RequestService reqservice;
 
     @GetMapping(path = "/request")
-    public String request(Model model, Principal principal) {
-
+    public String request(Model model, String action, Principal principal) {
+        //principal.getName() -> username(email)
+        //user.getName() -> Rendes Név
         User user = myUserDetailsService.loadUser(principal.getName());
         String name = user.getName();
         int admin = name.compareTo("Admin");
 
-        String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name=Péter Nagy";
+        String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name="+name;
 
         //Header beállítása az azonosításhoz
         HttpHeaders headers = new HttpHeaders();
@@ -53,19 +54,12 @@ public class HomeController {
         String firstName = jsonArrData.getString("first_name");
         String lastName = jsonArrData.getString("last_name");
         String id = jsonArrData.getString("id");
-        String choiceValue = jsonArr.getJSONObject(3).getString("value");
-        String startDateValue = jsonArr.getJSONObject(2).getString("value");
-        String endDateValue = jsonArr.getJSONObject(0).getString("value");
-        String statusValue = jsonArr.getJSONObject(1).getString("value");
+        String type = jsonArr.getJSONObject(3).getString("value");
+        String startDate = jsonArr.getJSONObject(2).getString("value");
+        String endDate = jsonArr.getJSONObject(0).getString("value");
+        String status = jsonArr.getJSONObject(1).getString("value");
 
         if(admin==0){
-           /* model.addAttribute("name", "null");
-            model.addAttribute("id", "null");
-            model.addAttribute("choicevalue", "null");
-            model.addAttribute("startDateValue", "null");
-            model.addAttribute("endDateValue", "null");
-            model.addAttribute("statusValue", "null");
-            model.addAttribute("email", "null");*/
             List<Request> reqArr = reqservice.listAllRequest();
             model.addAttribute("allRequest", reqArr);
 
@@ -73,18 +67,13 @@ public class HomeController {
             //1DB request a felhasználónév alapján
             Request request = reqservice.findRequestByUserName(principal.getName());
             model.addAttribute("allRequest", request);
-            /*model.addAttribute("name", firstName+" "+lastName);
-            model.addAttribute("id", id);
-            model.addAttribute("choicevalue", choiceValue);
-            model.addAttribute("startDateValue", startDateValue);
-            model.addAttribute("endDateValue", endDateValue);
-            model.addAttribute("statusValue", statusValue);
-            model.addAttribute("email", principal.getName());
-            model.addAttribute("allRequest", "null");*/
         }
 
-
-        model.addAttribute("nameee", name);
+        if(action == "save"){
+            if(reqservice.findRequestByUserName(principal.getName())==null)
+            reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
+            else return "buko";
+        }
 
         //Küldés Gombról érkezik
 /*            Request request = new Request(firstName + " " + lastName, name,
