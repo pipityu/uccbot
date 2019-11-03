@@ -40,6 +40,8 @@ public class HomeController {
         if (user.getName().compareTo("Admin") == 0){
             name = "Péter Nagy";
             admin = true;
+        }else {
+            name = user.getName();
         }
       //  int admin = name.compareTo("Admin");
 
@@ -74,13 +76,14 @@ public class HomeController {
             Request request = reqservice.findRequestByUserName(principal.getName());
             model.addAttribute("allRequest", request);
         }
-//email hibaaaaa
-        if(action == "save"){
+
+        if(action == "save" && admin){
+             model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
+        }else{
             if(reqservice.findRequestByUserName(principal.getName())==null){
                 reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
                 model.addAttribute("saved", "mentve");
             }
-            else return "buko";
         }
         model.addAttribute("namee", name);
 
