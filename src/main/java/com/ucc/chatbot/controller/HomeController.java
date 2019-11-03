@@ -30,7 +30,7 @@ public class HomeController {
     RequestService reqservice;
 
     @GetMapping(path = "/request")
-    public String request(Model model, int accept, Principal principal) {
+    public String request(Model model, Principal principal) {
 
         User user = myUserDetailsService.loadUser(principal.getName());
         String name = user.getName();
