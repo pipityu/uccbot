@@ -11,10 +11,6 @@ function addDate() {
     };
     xmlhttp.send();*/
 
-   var resp = fetch('https://sampleucc.herokuapp.com/info');
-   var json = resp.json();
-    document.getElementById("leker").innerHTML = json.category;
-
 
 /*        var startDate = $("#startDate").val();
         var endDate =  $("#endDate").val();

@@ -35,13 +35,11 @@ public class HomeController {
         //user.getName() -> Rendes Név
         User user = myUserDetailsService.loadUser(principal.getName());
       //  String name = (user.getName()=="Admin")?"Péter Nagy":user.getName(); //Admin a subscriberek között
-        String name = "";
+        String name = user.getName();
         boolean admin = false;
-        if (user.getName().compareTo("Admin") == 0){
+        if (name.compareTo("Admin") == 0){
             name = "Péter Nagy";
             admin = true;
-        }else {
-            name = user.getName();
         }
       //  int admin = name.compareTo("Admin");
 
@@ -77,14 +75,17 @@ public class HomeController {
             model.addAttribute("allRequest", request);
         }
 
-        if((action.compareTo("save")==0) && admin){
-             model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
-        }else if(action=="save"){
-            if(reqservice.findRequestByUserName(principal.getName())==null){
-                reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
-                model.addAttribute("saved", "mentve");
+        if(action.compareTo("save")==0) {
+            if (admin) {
+                model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
+            } else {
+                if (reqservice.findRequestByUserName(principal.getName()) == null) {
+                    reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
+                    model.addAttribute("saved", "mentve");
+                }
             }
         }
+
         model.addAttribute("namee", name);
 
         //Küldés Gombról érkezik
