@@ -77,9 +77,9 @@ public class HomeController {
             model.addAttribute("allRequest", request);
         }
 
-        if(action == "save" && admin){
+        if((action.compareTo("save")==0) && admin){
              model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
-        }else{
+        }else if(action=="save"){
             if(reqservice.findRequestByUserName(principal.getName())==null){
                 reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
                 model.addAttribute("saved", "mentve");
