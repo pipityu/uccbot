@@ -36,7 +36,7 @@ public class HomeController {
         String name = user.getName();
         int admin = name.compareTo("Admin");
 
-        String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name="+name;
+        String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name=Péter Nagy";
 
         //Header beállítása az azonosításhoz
         HttpHeaders headers = new HttpHeaders();
@@ -47,12 +47,12 @@ public class HomeController {
 
         //Adatok kinyerése JSON-ból (data, custom_fields)
         JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
-        JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(1); //data obj (amiben van ar array)
+        JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
 
-        String firstName = jsonArrData.getString("first_name");
+      /*  String firstName = jsonArrData.getString("first_name");
         String lastName = jsonArrData.getString("last_name");
-        String id = jsonArrData.getString("id");
+        String id = jsonArrData.getString("id");*/
         String choiceValue = jsonArr.getJSONObject(3).getString("value");
         String startDateValue = jsonArr.getJSONObject(2).getString("value");
         String endDateValue = jsonArr.getJSONObject(0).getString("value");
