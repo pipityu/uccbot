@@ -74,6 +74,7 @@ public class HomeController {
             reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
             else return "buko";
         }
+        model.addAttribute("namee", name);
 
         //Küldés Gombról érkezik
 /*            Request request = new Request(firstName + " " + lastName, name,
