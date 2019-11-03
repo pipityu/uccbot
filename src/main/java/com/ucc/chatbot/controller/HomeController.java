@@ -65,17 +65,20 @@ public class HomeController {
         String endDate = jsonArr.getJSONObject(0).getString("value");
         String status = jsonArr.getJSONObject(1).getString("value");
 
-        if(admin){
-            List<Request> reqArr = reqservice.listAllRequest();
-            model.addAttribute("allRequest", reqArr);
+        if(action.compareTo("check")==0){
+            if(admin){
+                List<Request> reqArr = reqservice.listAllRequest();
+                model.addAttribute("allRequest", reqArr);
 
-        }else{
-            //1DB request a felhasználónév alapján
-            Request request = reqservice.findRequestByUserName(principal.getName());
-            model.addAttribute("allRequest", request);
+            }else{
+                //1DB request a felhasználónév alapján
+                Request request = reqservice.findRequestByUserName(principal.getName());
+                model.addAttribute("allRequest", request);
+            }
         }
 
-        /*if(action.compareTo("save")==0) {
+
+        if(action.compareTo("save")==0) {
             if (admin) {
                 model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
             } else {
@@ -84,13 +87,9 @@ public class HomeController {
                     model.addAttribute("saved", "mentve");
                 }
             }
-        }*/
+        }
 
         model.addAttribute("namee", name);
-
-        //Küldés Gombról érkezik
-/*            Request request = new Request(firstName + " " + lastName, name,
-                    choiceValue, startDateValue, endDateValue, statusValue);*/
 
         return "userhome";
     }
