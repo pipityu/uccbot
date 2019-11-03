@@ -70,7 +70,7 @@
 -->
 
 <div>
-    <p>Kérelem</p><a th:href="@{/request(save='check')}"><button class="btn">Frissítés</button></a>
+    <p>Kérelem</p><a th:href="@{/checkrequest}"><button class="btn">Frissítés</button></a>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -97,7 +97,7 @@
         </th:block>
         </tbody>
     </table>
-    <p>Kérelem küldése</p><a th:href="@{/request(save='save')}"><button class="btn">Küldés</button></a>
+    <p>Kérelem küldése</p><a th:href="@{/request}"><button class="btn">Küldés</button></a>
     <p th:text="${saved}"></p>
     <p th:text="${namee}"></p>
 </div>
