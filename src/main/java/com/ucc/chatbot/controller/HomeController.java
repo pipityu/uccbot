@@ -84,7 +84,7 @@ public class HomeController {
         }
 
 
-        model.addAttribute("name", name);
+        model.addAttribute("nameee", name);
 
         //Küldés Gombról érkezik
 /*            Request request = new Request(firstName + " " + lastName, name,
