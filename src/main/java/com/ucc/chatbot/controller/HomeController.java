@@ -70,8 +70,10 @@ public class HomeController {
         }
 //email hibaaaaa
         if(action == "save"){
-            if(reqservice.findRequestByUserName(principal.getName())==null)
-            reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
+            if(reqservice.findRequestByUserName(principal.getName())==null){
+                reqservice.saveRequest(new Request(principal.getName(), name, type, startDate, endDate, status));
+                model.addAttribute("saved", "mentve");
+            }
             else return "buko";
         }
         model.addAttribute("namee", name);
