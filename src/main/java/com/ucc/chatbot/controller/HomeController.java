@@ -98,7 +98,7 @@ public class HomeController {
     }
 
     @GetMapping("/request/check")
-    public ModelAndView check(ModelMap model, Principal principal) {
+    public String check(Model model, Principal principal) {
         User user = myUserDetailsService.loadUser(principal.getName());
         String name = user.getName();
         boolean admin = false;
@@ -117,7 +117,7 @@ public class HomeController {
             model.addAttribute("allRequest", request);
         }
 
-        return new ModelAndView("/userhome", model);
+        return "userhome";
     }
 
     @GetMapping("/request/response")
