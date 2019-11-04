@@ -63,7 +63,7 @@ public class HomeController {
         String name = user.getName();
         boolean admin = false;
         if (name.compareTo("Admin") == 0){
-          //  name = ADMIN_NAME;
+            name = ADMIN_NAME;
             admin = true;
         }
 
