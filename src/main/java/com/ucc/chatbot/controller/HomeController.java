@@ -28,6 +28,14 @@ public class HomeController {
    private String LEAVE = "Szabadság";
    private String ADMIN_NAME = "Péter Nagy";
    private String API_TOKEN = "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6";
+   private long manyChatID = 0;
+
+   private String firstName = "null";
+    private String lastName = "null";
+    private String type = "null";
+    private String startDate = "null";
+    private String endDate = "null";
+    private String status = "null";
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -38,6 +46,44 @@ public class HomeController {
 
     @GetMapping(path = "/request/send")
     public String send(Model model, Principal principal) {  //PRIVATE???
+        User user = myUserDetailsService.loadUser(principal.getName());
+        String name = user.getName();
+        boolean admin = false;
+        if (name.compareTo("Admin") == 0){
+          //  name = ADMIN_NAME;
+            admin = true;
+        }
+
+
+            if(admin){
+                model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
+            } else {
+                Request request = new Request(principal.getName(), name, type, startDate, endDate, status);
+
+                if(type.compareTo("Táppénz") == 0)request.setStatus("Elfogadva");
+                if (reqservice.findRequestByUserName(principal.getName()) == null) {
+                    reqservice.saveRequest(request);
+                    model.addAttribute("saved", "Mentve");
+                }
+                else{
+                    reqservice.updateRequest(request);
+                    model.addAttribute("saved", "Felülírva");
+                }
+            }
+
+
+        return "forward:/request/check";
+    }
+
+    @GetMapping("/request/check")
+    public String check(Model model, Principal principal) {
+        /*User user = myUserDetailsService.loadUser(principal.getName());
+        String name = user.getName();
+        boolean admin = false;
+        if (name.compareTo("Admin") == 0){
+          //  name = ADMIN_NAME;
+            admin = true;
+        }*/
         //principal.getName() -> username(email)
         //user.getName() -> Rendes Név
         User user = myUserDetailsService.loadUser(principal.getName());
@@ -63,44 +109,13 @@ public class HomeController {
         JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
 
-        String firstName = jsonArrData.getString("first_name");
-        String lastName = jsonArrData.getString("last_name");
-        String id = jsonArrData.getString("id");
-        String type = jsonArr.getJSONObject(3).getString("value");
-        String startDate = jsonArr.getJSONObject(2).getString("value");
-        String endDate = jsonArr.getJSONObject(1).getString("value");
-        String status = jsonArr.getJSONObject(0).getString("value");
-
-
-            if(admin){
-                model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
-            } else {
-                Request request = new Request(principal.getName(), name, type, startDate, endDate, status);
-
-                if(type.compareTo("Táppénz") == 0)request.setStatus("Elfogadva");
-                if (reqservice.findRequestByUserName(principal.getName()) == null) {
-                    reqservice.saveRequest(request);
-                    model.addAttribute("saved", "Mentve");
-                }
-                else{
-                    reqservice.updateRequest(request);
-                    model.addAttribute("saved", "Felülírva");
-                }
-            }
-
-
-        return "forward:/request/check";
-    }
-
-    @GetMapping("/request/check")
-    public String check(Model model, Principal principal) {
-        User user = myUserDetailsService.loadUser(principal.getName());
-        String name = user.getName();
-        boolean admin = false;
-        if (name.compareTo("Admin") == 0){
-          //  name = ADMIN_NAME;
-            admin = true;
-        }
+        firstName = jsonArrData.getString("first_name");
+        lastName = jsonArrData.getString("last_name");
+        manyChatID = jsonArrData.getLong("id");  //EZ KELL AZ ÜZENETKÜLDÉSHEZ AMIT EGY JSONBEN ÁLLÍTOK ÖSSZE
+        type = jsonArr.getJSONObject(3).getString("value");
+        startDate = jsonArr.getJSONObject(2).getString("value");
+        endDate = jsonArr.getJSONObject(1).getString("value");
+        status = jsonArr.getJSONObject(0).getString("value");
 
         if(admin){
             List<Request> reqArr = reqservice.listAllRequest();
@@ -122,7 +137,12 @@ public class HomeController {
         r.setStatus("Elfogadva");
         if(action == 0)
             reqservice.deleteRequest(id);
-        else reqservice.updateRequest(r);
+
+        else{
+            reqservice.updateRequest(r);
+            JSONObject json = new JSONObject();
+            json.put("subscriber_id", );
+        }
 
         return "forward:/request/check";
     }
