@@ -24,6 +24,11 @@ import java.util.Optional;
 
 @Controller
 public class HomeController {
+   private String TP = "Táppénz";
+   private String LEAVE = "Szabadság";
+   private String ADMIN_NAME = "Péter Nagy";
+   private String API_TOKEN = "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6";
+   Principal principalaa;
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -33,25 +38,24 @@ public class HomeController {
     RequestService reqservice;
 
     @GetMapping(path = "/request/send")
-    public String send(Model model, Principal principal) {
+    public String send(Model model, Principal principal) {  //PRIVATE???
         //principal.getName() -> username(email)
         //user.getName() -> Rendes Név
         User user = myUserDetailsService.loadUser(principal.getName());
-      //  String name = (user.getName()=="Admin")?"Péter Nagy":user.getName(); //Admin a subscriberek között
         String name = user.getName();
         boolean admin = false;
+
         if (name.compareTo("Admin") == 0){
-            name = "Péter Nagy";
+            name = ADMIN_NAME;
             admin = true;
         }
-      //  int admin = name.compareTo("Admin");
 
         String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name="+name;
 
         //Header beállítása az azonosításhoz
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6");
+        headers.add("Authorization", API_TOKEN);
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
 
@@ -65,23 +69,16 @@ public class HomeController {
         String id = jsonArrData.getString("id");
         String type = jsonArr.getJSONObject(3).getString("value");
         String startDate = jsonArr.getJSONObject(2).getString("value");
-        String endDate = jsonArr.getJSONObject(0).getString("value");
-        String status = jsonArr.getJSONObject(1).getString("value");
+        String endDate = jsonArr.getJSONObject(1).getString("value");
+        String status = jsonArr.getJSONObject(0).getString("value");
 
 
-            /*if(admin){
-                List<Request> reqArr = reqservice.listAllRequest();
-                model.addAttribute("allRequest", reqArr);
-
-            }else{
-                //1DB request a felhasználónév alapján
-                Request request = reqservice.findRequestByUserName(principal.getName());
-                model.addAttribute("allRequest", request);
-            }*/
             if(admin){
                 model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
             } else {
                 Request request = new Request(principal.getName(), name, type, startDate, endDate, status);
+                //IF TP akkor setStatus Elfogadva
+                if(type.compareTo("Táppénz") == 0)request.setStatus("Elfogadva");
                 if (reqservice.findRequestByUserName(principal.getName()) == null) {
                     reqservice.saveRequest(request);
                     model.addAttribute("saved", "Mentve");
@@ -92,7 +89,6 @@ public class HomeController {
                 }
             }
 
-        model.addAttribute("namee", name);
 
         return "forward:/request/check";
     }
@@ -103,7 +99,7 @@ public class HomeController {
         String name = user.getName();
         boolean admin = false;
         if (name.compareTo("Admin") == 0){
-            name = "Péter Nagy";
+          //  name = ADMIN_NAME;
             admin = true;
         }
 
@@ -116,6 +112,7 @@ public class HomeController {
             Request request = reqservice.findRequestByUserName(principal.getName());
             model.addAttribute("allRequest", request);
         }
+        model.addAttribute("pri", principalaa.getName());
 
         return "userhome";
     }
