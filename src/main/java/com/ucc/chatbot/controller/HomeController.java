@@ -73,7 +73,7 @@ public class HomeController {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.add("Authorization", API_TOKEN);
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);*/
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
 
         //Adatok kinyerése JSON-ból (data, custom_fields)
@@ -149,10 +149,10 @@ public class HomeController {
         Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
         Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
         r.setStatus("Elfogadva");
-        if(action == 0)
+        if(action == 3)
             reqservice.deleteRequest(id);
 
-        else{
+        else if(action == 0){
             reqservice.updateRequest(r);
             String jsonSendMessage = "{\n" +
                     "   \"subscriber_id\":0,\n" +
@@ -169,7 +169,7 @@ public class HomeController {
                     "   }";
             String theUrl = "https://api.manychat.com/fb/sending/sendContent";
           //  JsonObject convertedObject = new Gson().fromJson(jsonSendMessage, JsonObject.class);
-            HttpEntity<String> entity = new HttpEntity<String>(jsonSendMessage, headers);
+            HttpEntity<String> entity = new HttpEntity<>(jsonSendMessage, headers);
 
             ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.POST, entity, String.class);
 
