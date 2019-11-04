@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.List;
@@ -31,7 +33,7 @@ public class HomeController {
     RequestService reqservice;
 
     @GetMapping(path = "/request/send")
-    public String request(Model model, Principal principal) {
+    public String send(Model model, Principal principal) {
         //principal.getName() -> username(email)
         //user.getName() -> Rendes Név
         User user = myUserDetailsService.loadUser(principal.getName());
@@ -96,7 +98,7 @@ public class HomeController {
     }
 
     @GetMapping("/request/check")
-    public String checkrequest(Model model, Principal principal) {
+    public ModelAndView check(ModelMap model, Principal principal) {
         User user = myUserDetailsService.loadUser(principal.getName());
         String name = user.getName();
         boolean admin = false;
@@ -115,11 +117,11 @@ public class HomeController {
             model.addAttribute("allRequest", request);
         }
 
-        return "userhome";
+        return new ModelAndView("/userhome", model);
     }
 
     @GetMapping("/request/response")
-    public String accept(int action, int id) {
+    public String response(int action, int id) {
         Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
         Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
         r.setStatus("Elfogadva");
@@ -149,5 +151,10 @@ public class HomeController {
     public String adminhome() {
         return "adminhome";
     }
+
+
+    /*redirect will respond with a 302 and the new URL in the Location header; the browser/client will then make another request to the new URL
+    forward happens entirely on a server side; the Servlet container forwards the same request to the target URL; the URL won't change in the browser*/
+
 
 }
