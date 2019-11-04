@@ -21,6 +21,8 @@ public class RequestService {
 
     public Request findRequestByUserName(String username){return reqrepo.findByUserName(username);}
 
+    public Request findRequestById(int id){reqrepo.findById(id);}
+
     public void saveRequest(Request request){
         reqrepo.save(request);
     }
@@ -28,5 +30,6 @@ public class RequestService {
     public void updateRequest(Request request){
         reqrepo.updateRequest(request.getType(), request.getStart_date(), request.getEnd_date(), request.getStatus(), request.getUsername());
     }
+    public void deleteRequest(int id){reqrepo.deleteById(id);}
 
 }

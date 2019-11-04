@@ -97,7 +97,6 @@ public class HomeController {
     @GetMapping("/checkrequest")
     public String checkrequest(Model model, Principal principal) {
         User user = myUserDetailsService.loadUser(principal.getName());
-        //  String name = (user.getName()=="Admin")?"Péter Nagy":user.getName(); //Admin a subscriberek között
         String name = user.getName();
         boolean admin = false;
         if (name.compareTo("Admin") == 0){
@@ -118,8 +117,13 @@ public class HomeController {
         return "userhome";
     }
 
-    @GetMapping("/accept")
-    public String accept(String username) {
+    @GetMapping("/response")
+    public String accept(int action, int id) {
+        Request request = reqservice.findRequestById(id);
+        request.setStatus("Elfogadva");
+        if(action == 0)
+            reqservice.deleteRequest(id);
+        else reqservice.updateRequest(request);
 
         return "forward:/checkrequest";
     }
