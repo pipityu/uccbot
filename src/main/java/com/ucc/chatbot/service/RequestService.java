@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -21,7 +22,8 @@ public class RequestService {
 
     public Request findRequestByUserName(String username){return reqrepo.findByUserName(username);}
 
-    public Request findRequestById(int id){reqrepo.findById(id);}
+    public Optional<Request> findRequestById(int id){return reqrepo.findById(id);}
+
 
     public void saveRequest(Request request){
         reqrepo.save(request);

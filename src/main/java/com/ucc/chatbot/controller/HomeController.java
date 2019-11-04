@@ -17,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -119,11 +120,12 @@ public class HomeController {
 
     @GetMapping("/response")
     public String accept(int action, int id) {
-        Request request = reqservice.findRequestById(id);
-        request.setStatus("Elfogadva");
+        Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
+        Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
+        r.setStatus("Elfogadva");
         if(action == 0)
             reqservice.deleteRequest(id);
-        else reqservice.updateRequest(request);
+        else reqservice.updateRequest(r);
 
         return "forward:/checkrequest";
     }
