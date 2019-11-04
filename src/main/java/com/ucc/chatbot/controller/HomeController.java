@@ -156,7 +156,7 @@ public class HomeController {
         else if(action == 0){
             reqservice.updateRequest(r);
             //REQUESTBE KELL MENTENI A CHAT ID-T IS ÉS AZ ALAPJÁN TÖRÖLNI!!
-            String jsonSendMessage = "{   \"subscriber_id\":"+manyChatID+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
+            String jsonSendMessage = "{   \"subscriber_id\":"+r.getManyChatId()+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
             String theUrl = "https://api.manychat.com/fb/sending/sendContent";
           //  JsonObject convertedObject = new Gson().fromJson(jsonSendMessage, JsonObject.class);
             HttpEntity<String> entity = new HttpEntity<>(jsonSendMessage, headers);
