@@ -76,7 +76,7 @@ public class HomeController {
                 model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
             } else {
                 Request request = new Request(principal.getName(), name, type, startDate, endDate, status);
-                //IF TP akkor setStatus Elfogadva
+
                 if(type.compareTo("Táppénz") == 0)request.setStatus("Elfogadva");
                 if (reqservice.findRequestByUserName(principal.getName()) == null) {
                     reqservice.saveRequest(request);
