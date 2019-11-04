@@ -1,9 +1,7 @@
 package com.ucc.chatbot.controller;
 
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+
 import com.ucc.chatbot.model.Request;
 import com.ucc.chatbot.model.User;
 import com.ucc.chatbot.service.MyUserDetailsService;
@@ -15,10 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.List;
@@ -84,7 +80,7 @@ public class HomeController {
 
         firstName = jsonArrData.getString("first_name");
         lastName = jsonArrData.getString("last_name");
-        manyChatID = jsonArrData.getString("id");  //EZ KELL AZ ÜZENETKÜLDÉSHEZ AMIT EGY JSONBEN ÁLLÍTOK ÖSSZE
+        manyChatID = jsonArrData.getString("id");  //EZ CSAK AZ AKTUÁLIS BEJELENTKEZETTNEK VAN
         type = jsonArr.getJSONObject(3).getString("value");
         startDate = jsonArr.getJSONObject(2).getString("value");
         endDate = jsonArr.getJSONObject(1).getString("value");
@@ -156,7 +152,7 @@ public class HomeController {
         else if(action == 0){
             reqservice.updateRequest(r);
             //REQUESTBE KELL MENTENI A CHAT ID-T IS ÉS AZ ALAPJÁN TÖRÖLNI!!
-            String jsonSendMessage = "{   \"subscriber_id\":"+r.getManyChatId()+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
+            String jsonSendMessage = "{   \"subscriber_id\":"+r.getManychat_id()+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
             String theUrl = "https://api.manychat.com/fb/sending/sendContent";
           //  JsonObject convertedObject = new Gson().fromJson(jsonSendMessage, JsonObject.class);
             HttpEntity<String> entity = new HttpEntity<>(jsonSendMessage, headers);

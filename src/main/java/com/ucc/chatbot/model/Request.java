@@ -16,19 +16,19 @@ public class Request {
     private String start_date;
     private String end_date;
     private String status;
-    private String manyChatId;
+    private String manychat_id;
 
 
     public Request(){}
 
-    public Request(String username, String name, String type, String start_date, String end_date, String status, String manyChatId) {
+    public Request(String username, String name, String type, String start_date, String end_date, String status, String manychat_id) {
         this.username = username;
         this.name = name;
         this.type = type;
         this.start_date = start_date;
         this.end_date = end_date;
         this.status = status;
-        this.manyChatId = manyChatId;
+        this.manychat_id = manychat_id;
     }
 
     @OneToOne(mappedBy = "request")
@@ -42,12 +42,12 @@ public class Request {
         this.id = id;
     }
 
-    public String getManyChatId() {
-        return manyChatId;
+    public String getManychat_id() {
+        return manychat_id;
     }
 
     public void setManyChatId(String manyChatId) {
-        this.manyChatId = manyChatId;
+        this.manychat_id = manyChatId;
     }
 
     public String getUsername() {
