@@ -28,7 +28,6 @@ public class HomeController {
    private String LEAVE = "Szabadság";
    private String ADMIN_NAME = "Péter Nagy";
    private String API_TOKEN = "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6";
-   Principal principalaa;
 
     @Autowired
     private MyUserDetailsService myUserDetailsService;
@@ -112,7 +111,6 @@ public class HomeController {
             Request request = reqservice.findRequestByUserName(principal.getName());
             model.addAttribute("allRequest", request);
         }
-        model.addAttribute("pri", principalaa.getName());
 
         return "userhome";
     }
