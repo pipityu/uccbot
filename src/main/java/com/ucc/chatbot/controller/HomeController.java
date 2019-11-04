@@ -154,18 +154,18 @@ public class HomeController {
 
         else if(action == 0){
             reqservice.updateRequest(r);
-            String jsonSendMessage = "{\n" +
-                    "   \"subscriber_id\":3809668825726118,\n" +
-                    "   \"data\":{\n" +
-                    "      \"version\":\"v2\",\n" +
-                    "      \"content\":{\n" +
-                    "         \"messages\":[\n" +
-                    "            {\n" +
-                    "               \"type\":\"text\",\n" +
-                    "               \"text\":\"Ide jön az üzenet\"\n" +
-                    "            }\n" +
-                    "         ]\n" +
-                    "      }\n" +
+            String jsonSendMessage = "{" +
+                    "   \"subscriber_id\":3809668825726118," +
+                    "   \"data\":{" +
+                    "      \"version\":\"v2\"," +
+                    "      \"content\":{" +
+                    "         \"messages\":[" +
+                    "            {" +
+                    "               \"type\":\"text\"," +
+                    "               \"text\":\"Ide jön az üzenet\"" +
+                    "            }" +
+                    "         ]" +
+                    "      }" +
                     "   }";
             String theUrl = "https://api.manychat.com/fb/sending/sendContent";
           //  JsonObject convertedObject = new Gson().fromJson(jsonSendMessage, JsonObject.class);
