@@ -70,7 +70,7 @@
 -->
 
 <div>
-    <p>Kérelem</p><a th:href="@{/checkrequest}"><button class="btn">Frissítés</button></a>
+    <p>Kérelem</p><a th:href="@{/request/check}"><button class="btn">Frissítés</button></a>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -99,16 +99,14 @@
                 <td th:text="${request.getStatus()}"></td>
                 <td>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/response(action=0 ,id=${request.getId()})}"><button class="btn">Törlés</button></a>
+                        <a th:href="@{/request/response(action=0 ,id=${request.getId()})}"><button class="btn">Törlés</button></a>
                     </div>
                 </td>
             </tr>
         </th:block>
         </tbody>
     </table>
-    <p>Kérelem küldése</p><a th:href="@{/request}"><button class="btn">Küldés</button></a>
-    <p th:text="${saved}"></p>
-    <p th:text="${namee}"></p>
+    <p>Kérelem küldése</p><a th:href="@{/request/send}"><button class="btn">Küldés</button></a>
 </div>
 </body>
 </html>

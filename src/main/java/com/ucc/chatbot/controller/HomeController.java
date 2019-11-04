@@ -30,7 +30,7 @@ public class HomeController {
     @Autowired
     RequestService reqservice;
 
-    @GetMapping(path = "/request")
+    @GetMapping(path = "/request/send")
     public String request(Model model, Principal principal) {
         //principal.getName() -> username(email)
         //user.getName() -> Rendes Név
@@ -92,10 +92,10 @@ public class HomeController {
 
         model.addAttribute("namee", name);
 
-        return "userhome";
+        return "forward:/request/check";
     }
 
-    @GetMapping("/checkrequest")
+    @GetMapping("/request/check")
     public String checkrequest(Model model, Principal principal) {
         User user = myUserDetailsService.loadUser(principal.getName());
         String name = user.getName();
@@ -118,7 +118,7 @@ public class HomeController {
         return "userhome";
     }
 
-    @GetMapping("/response")
+    @GetMapping("/request/response")
     public String accept(int action, int id) {
         Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
         Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
@@ -127,7 +127,7 @@ public class HomeController {
             reqservice.deleteRequest(id);
         else reqservice.updateRequest(r);
 
-        return "forward:/checkrequest";
+        return "forward:/request/check";
     }
 
     @GetMapping("/")
@@ -137,7 +137,7 @@ public class HomeController {
 
     @GetMapping("/home")
     public String home() {
-        return "userhome";
+        return "forward:/request/check";
     }
 
     @GetMapping("/login")
