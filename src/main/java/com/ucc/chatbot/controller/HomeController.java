@@ -31,7 +31,7 @@ public class HomeController {
    private String LEAVE = "Szabadság";
    private String ADMIN_NAME = "Péter Nagy";
    private String API_TOKEN = "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6";
-   private long manyChatID = 0;
+   private String manyChatID = "null";
 
    private String firstName = "null";
     private String lastName = "null";
@@ -39,6 +39,7 @@ public class HomeController {
     private String startDate = "null";
     private String endDate = "null";
     private String status = "null";
+    private String msg = "Elfogadva";
 
 
     HttpHeaders headers = new HttpHeaders();
@@ -83,7 +84,7 @@ public class HomeController {
 
         firstName = jsonArrData.getString("first_name");
         lastName = jsonArrData.getString("last_name");
-        manyChatID = jsonArrData.getLong("id");  //EZ KELL AZ ÜZENETKÜLDÉSHEZ AMIT EGY JSONBEN ÁLLÍTOK ÖSSZE
+        manyChatID = jsonArrData.getString("id");  //EZ KELL AZ ÜZENETKÜLDÉSHEZ AMIT EGY JSONBEN ÁLLÍTOK ÖSSZE
         type = jsonArr.getJSONObject(3).getString("value");
         startDate = jsonArr.getJSONObject(2).getString("value");
         endDate = jsonArr.getJSONObject(1).getString("value");
@@ -93,7 +94,7 @@ public class HomeController {
             if(admin){
                 model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
             } else {
-                Request request = new Request(principal.getName(), name, type, startDate, endDate, status);
+                Request request = new Request(principal.getName(), name, type, startDate, endDate, status, manyChatID);
 
                 if(type.compareTo("Táppénz") == 0)request.setStatus("Elfogadva");
                 if (reqservice.findRequestByUserName(principal.getName()) == null) {
@@ -154,8 +155,8 @@ public class HomeController {
 
         else if(action == 0){
             reqservice.updateRequest(r);
-            String msg = "Elfogadva";
-            String jsonSendMessage = "{   \"subscriber_id\":3809668825726118,\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
+            //REQUESTBE KELL MENTENI A CHAT ID-T IS ÉS AZ ALAPJÁN TÖRÖLNI!!
+            String jsonSendMessage = "{   \"subscriber_id\":"+manyChatID+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
             String theUrl = "https://api.manychat.com/fb/sending/sendContent";
           //  JsonObject convertedObject = new Gson().fromJson(jsonSendMessage, JsonObject.class);
             HttpEntity<String> entity = new HttpEntity<>(jsonSendMessage, headers);

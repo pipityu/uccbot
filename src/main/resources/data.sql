@@ -15,9 +15,9 @@ INSERT INTO roles (id, name) VALUES
 --(2, 'ROLE_ACTUATOR'),
 (2, 'ROLE_USER');
 
-INSERT INTO requests(id, username, type, start_date, end_date, status, name)  VALUES
-(1, 'user@user.com', 'szabadság', '2019-01-01', '2019-01-11', 'várakozás', 'Péter Nagy'),
-(2, 'admin@admin.com', 'null', 'null', 'null', 'null', 'null');
+INSERT INTO requests(id, username, type, start_date, end_date, status, name, manyChatId)  VALUES
+(1, 'user@user.com', 'szabadság', '2019-01-01', '2019-01-11', 'várakozás', 'Péter Nagy', '3809668825726118'),
+(2, 'admin@admin.com', 'null', 'null', 'null', 'null', 'null', '3433995213292221');
 
 INSERT INTO users (id, email, password, name) VALUES
 (1, 'admin@admin.com', '$2a$10$hKDVYxLefVHV/vtuPhWD3OigtRyOykRLDdUAp80Z1crSoS1lFqaFS', 'Admin'),
