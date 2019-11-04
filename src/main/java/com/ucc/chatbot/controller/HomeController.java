@@ -1,6 +1,9 @@
 package com.ucc.chatbot.controller;
 
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ucc.chatbot.model.Request;
 import com.ucc.chatbot.model.User;
 import com.ucc.chatbot.service.MyUserDetailsService;
@@ -37,6 +40,15 @@ public class HomeController {
     private String endDate = "null";
     private String status = "null";
 
+
+    HttpHeaders headers = new HttpHeaders();
+    {
+
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Authorization", API_TOKEN);
+
+    }
+
     @Autowired
     private MyUserDetailsService myUserDetailsService;
     @Autowired
@@ -53,6 +65,29 @@ public class HomeController {
           //  name = ADMIN_NAME;
             admin = true;
         }
+
+        String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name="+name;
+
+        //Header beállítása az azonosításhoz
+        /*HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.add("Authorization", API_TOKEN);
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);*/
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
+
+        //Adatok kinyerése JSON-ból (data, custom_fields)
+        JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
+        JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
+        JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
+
+        firstName = jsonArrData.getString("first_name");
+        lastName = jsonArrData.getString("last_name");
+        manyChatID = jsonArrData.getLong("id");  //EZ KELL AZ ÜZENETKÜLDÉSHEZ AMIT EGY JSONBEN ÁLLÍTOK ÖSSZE
+        type = jsonArr.getJSONObject(3).getString("value");
+        startDate = jsonArr.getJSONObject(2).getString("value");
+        endDate = jsonArr.getJSONObject(1).getString("value");
+        status = jsonArr.getJSONObject(0).getString("value");
 
 
             if(admin){
@@ -95,27 +130,6 @@ public class HomeController {
             admin = true;
         }
 
-        String theUrl = "https://api.manychat.com/fb/subscriber/findByName?name="+name;
-
-        //Header beállítása az azonosításhoz
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.add("Authorization", API_TOKEN);
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
-
-        //Adatok kinyerése JSON-ból (data, custom_fields)
-        JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
-        JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
-        JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
-
-        firstName = jsonArrData.getString("first_name");
-        lastName = jsonArrData.getString("last_name");
-        manyChatID = jsonArrData.getLong("id");  //EZ KELL AZ ÜZENETKÜLDÉSHEZ AMIT EGY JSONBEN ÁLLÍTOK ÖSSZE
-        type = jsonArr.getJSONObject(3).getString("value");
-        startDate = jsonArr.getJSONObject(2).getString("value");
-        endDate = jsonArr.getJSONObject(1).getString("value");
-        status = jsonArr.getJSONObject(0).getString("value");
 
         if(admin){
             List<Request> reqArr = reqservice.listAllRequest();
@@ -140,8 +154,25 @@ public class HomeController {
 
         else{
             reqservice.updateRequest(r);
-            JSONObject json = new JSONObject();
-          //  json.put("subscriber_id", );
+            String jsonSendMessage = "{\n" +
+                    "   \"subscriber_id\":0,\n" +
+                    "   \"data\":{\n" +
+                    "      \"version\":\"v2\",\n" +
+                    "      \"content\":{\n" +
+                    "         \"messages\":[\n" +
+                    "            {\n" +
+                    "               \"type\":\"text\",\n" +
+                    "               \"text\":\"Ide jön az üzenet\"\n" +
+                    "            }\n" +
+                    "         ]\n" +
+                    "      }\n" +
+                    "   }";
+            String theUrl = "https://api.manychat.com/fb/sending/sendContent";
+          //  JsonObject convertedObject = new Gson().fromJson(jsonSendMessage, JsonObject.class);
+            HttpEntity<String> entity = new HttpEntity<String>(jsonSendMessage, headers);
+
+            ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.POST, entity, String.class);
+
         }
 
         return "forward:/request/check";
