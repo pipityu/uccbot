@@ -78,13 +78,31 @@ public class HomeController {
         JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
 
-        firstName = jsonArrData.getString("first_name");
+        String zero = jsonArr.getJSONObject(0).getString("name");
+        String one = jsonArr.getJSONObject(1).getString("name");
+        String two = jsonArr.getJSONObject(2).getString("name");
+        String three = jsonArr.getJSONObject(3).getString("name");
+
+
+        for(int i = 0; i<4; i++){
+            String val = jsonArr.getJSONObject(i).getString("name");
+            String addVal = jsonArr.getJSONObject(i).getString("value");
+            switch(val){
+                case "choice" : type = addVal;
+                case "startDate" : startDate = addVal;
+                case "endDate" : endDate = addVal;
+                case "status" : startDate = addVal;
+
+            }
+        }
+
+        /*firstName = jsonArrData.getString("first_name");
         lastName = jsonArrData.getString("last_name");
         manyChatID = jsonArrData.getString("id");  //EZ CSAK AZ AKTUÁLIS BEJELENTKEZETTNEK VAN
         type = jsonArr.getJSONObject(3).getString("value");
         startDate = jsonArr.getJSONObject(2).getString("value");
         endDate = jsonArr.getJSONObject(1).getString("value");
-        status = jsonArr.getJSONObject(0).getString("value");
+        status = jsonArr.getJSONObject(0).getString("value");*/
 
 
             if(admin){
@@ -92,7 +110,9 @@ public class HomeController {
             } else {
                 Request request = new Request(principal.getName(), name, type, startDate, endDate, status, manyChatID);
 
-                if(type.compareTo("Táppénz") == 0)request.setStatus("Elfogadva");
+                if(type.compareTo("Táppénz") == 0){
+                    request.setStatus("Elfogadva");
+                }
                 if (reqservice.findRequestByUserName(principal.getName()) == null) {
                     reqservice.saveRequest(request);
                     model.addAttribute("saved", "Mentve");
