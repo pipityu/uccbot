@@ -101,8 +101,8 @@
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <form th:action="@{/request/response}" method="post">
                             <input type="hidden" name="requestId" th:value="${request.getId()}">
-                            <input class="btn" type="submit" name="action" value="Elutasítás">
-                            <input class="btn" type="submit" name="action" value="Elfogadás">
+                            <input class="btn" type="submit" name="action" th:value="Elutasítás">
+                            <input class="btn" type="submit" name="action" th:value="Elfogadás">
                         </form>
                       <!--  <a th:href="@{/request/response(action=0 ,id=${request.getId()})}"><button class="btn">Elutasítás</button></a> -->
                     </div>
