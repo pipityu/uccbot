@@ -146,11 +146,11 @@ public class HomeController {
         else{
             r.setStatus("Elfogadva");
             reqservice.updateRequest(r);
-            String jsonSendMessage = "{   \"subscriber_id\":"+r.getManychat_id()+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
-            String theUrl = "https://api.manychat.com/fb/sending/sendContent";
-            HttpEntity<String> entity = new HttpEntity<>(jsonSendMessage, headers);
-            ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.POST, entity, String.class);
         }
+        String jsonSendMessage = "{   \"subscriber_id\":"+r.getManychat_id()+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
+        String theUrl = "https://api.manychat.com/fb/sending/sendContent";
+        HttpEntity<String> entity = new HttpEntity<>(jsonSendMessage, headers);
+        ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.POST, entity, String.class);
         return "forward:/request/check";
     }
 
