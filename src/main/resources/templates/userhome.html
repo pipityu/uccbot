@@ -100,7 +100,7 @@
                 <td>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <form th:action="@{/request/response}" method="post">
-                            <input type="hidden" name="requestId" value="${request.getId()}">
+                            <input type="hidden" name="requestId" th:value="${request.getId()}">
                             <input class="btn" type="submit" name="action" th:value="Elutasítás">
                             <input class="btn" type="submit" name="action" th:value="Elfogadás">
                         </form>
