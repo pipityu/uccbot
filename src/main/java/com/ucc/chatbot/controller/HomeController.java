@@ -107,17 +107,9 @@ public class HomeController {
         return "forward:/request/check";
     }
 
-    @GetMapping("/request/check")
+    @RequestMapping(value = "/request/check", method = {RequestMethod.GET, RequestMethod.POST})
     public String check(Model model, Principal principal) {
-        /*User user = myUserDetailsService.loadUser(principal.getName());
-        String name = user.getName();
-        boolean admin = false;
-        if (name.compareTo("Admin") == 0){
-          //  name = ADMIN_NAME;
-            admin = true;
-        }*/
-        //principal.getName() -> username(email)
-        //user.getName() -> Rendes Név
+
         User user = myUserDetailsService.loadUser(principal.getName());
         String name = user.getName();
         boolean admin = false;
