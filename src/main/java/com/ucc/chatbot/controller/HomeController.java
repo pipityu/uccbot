@@ -123,7 +123,6 @@ public class HomeController {
         boolean admin = false;
 
         if (name.compareTo("Admin") == 0){
-          //  name = ADMIN_NAME;
             admin = true;
         }
 
