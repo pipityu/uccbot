@@ -123,7 +123,7 @@ public class HomeController {
         boolean admin = false;
 
         if (name.compareTo("Admin") == 0){
-            name = ADMIN_NAME;
+          //  name = ADMIN_NAME;
             admin = true;
         }
 
@@ -141,26 +141,24 @@ public class HomeController {
         return "userhome";
     }
 
-    @GetMapping("/request/response")
-    public String response(int action, int id) {
+    //action = formról beérkező adat(elutasítás vagy elfogadás)
+    //id = szintén a formról a request id-ja
+    @PostMapping("/request/response")
+    public String response(@RequestBody String action, int id) {
         Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
         Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
-        r.setStatus("Elfogadva");
-        if(action == 3)
+        msg = action;
+        if(action.compareTo("Elutasítás") == 0){
             reqservice.deleteRequest(id);
-
-        else if(action == 0){
+        }
+        else{
+            r.setStatus("Elfogadva");
             reqservice.updateRequest(r);
-            //REQUESTBE KELL MENTENI A CHAT ID-T IS ÉS AZ ALAPJÁN TÖRÖLNI!!
             String jsonSendMessage = "{   \"subscriber_id\":"+r.getManychat_id()+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
             String theUrl = "https://api.manychat.com/fb/sending/sendContent";
-          //  JsonObject convertedObject = new Gson().fromJson(jsonSendMessage, JsonObject.class);
             HttpEntity<String> entity = new HttpEntity<>(jsonSendMessage, headers);
-
             ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.POST, entity, String.class);
-
         }
-
         return "forward:/request/check";
     }
 

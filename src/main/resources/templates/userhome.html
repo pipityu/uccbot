@@ -99,9 +99,19 @@
                 <td th:text="${request.getStatus()}"></td>
                 <td>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/request/response(action=0 ,id=${request.getId()})}"><button class="btn">Törlés</button></a>
+                        <form action="@{/request/response}">
+                            <input type="hidden" name="request_id" value="${request.getId()}">
+                            <input class="btn" type="submit" name="action" value="Elutasítás">
+                            <input class="btn" type="submit" name="action" value="Elfogadás">
+                        </form>
+                      <!--  <a th:href="@{/request/response(action=0 ,id=${request.getId()})}"><button class="btn">Elutasítás</button></a> -->
                     </div>
                 </td>
+<!--                <td>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <a th:href="@{/request/response(action=1 ,id=${request.getId()})}"><button class="btn">Elfogadás</button></a>
+                    </div>
+                </td>-->
             </tr>
         </th:block>
         </tbody>
