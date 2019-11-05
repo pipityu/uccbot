@@ -135,7 +135,8 @@ public class HomeController {
     //action = formról beérkező adat(elutasítás vagy elfogadás)
     //id = szintén a formról a request id-ja
     @PostMapping("/request/response")
-    public String response(@RequestBody String action, int id) {
+    public String response(@RequestBody String action, String stringId) {
+        int id = Integer.parseInt(stringId);
         Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
         Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
         msg = action;
