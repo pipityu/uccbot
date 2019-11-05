@@ -135,13 +135,13 @@ public class HomeController {
     //action = formról beérkező adat(elutasítás vagy elfogadás)
     //id = szintén a formról a request id-ja
     @PostMapping("/request/response")
-    public String response(@RequestParam String action, @RequestParam int requestId) {
-      //  int id = Integer.parseInt(stringId);
-        Optional<Request> request = reqservice.findRequestById(requestId);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
+    public String response(@RequestParam String action, @RequestParam String requestId) {
+        int id = Integer.parseInt(requestId);
+        Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
         Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
         msg = action;
         if(action.compareTo("Elutasítás") == 0){
-            reqservice.deleteRequest(requestId);
+            reqservice.deleteRequest(id);
         }
         else{
             r.setStatus("Elfogadva");
