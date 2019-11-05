@@ -99,8 +99,8 @@
                 <td th:text="${request.getStatus()}"></td>
                 <td>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <form action="@{/request/response}">
-                            <input type="hidden" name="request_id" value="${request.getId()}">
+                        <form th:action="@{/request/response}">
+                            <input type="hidden" name="request_id" th:field="${request.getId()}">
                             <input class="btn" type="submit" name="action" value="Elutasítás">
                             <input class="btn" type="submit" name="action" value="Elfogadás">
                         </form>
