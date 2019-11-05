@@ -99,10 +99,10 @@
                 <td th:text="${request.getStatus()}"></td>
                 <td>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <form th:action="@{/request/response}" th:object = ${request}" method="post">
+                        <form th:action="@{/request/response}" th:object = "${request}" method="post">
                             <input type="hidden" name="requestId" th:field="*{request.getId()}">
-                            <input class="btn" type="submit" name="action" th:value="Elutasítás">
-                            <input class="btn" type="submit" name="action" th:value="Elfogadás">
+                            <input class="btn" type="submit" name="action" th:field="Elutasítás">
+                            <input class="btn" type="submit" name="action" th:field="Elfogadás">
                         </form>
                       <!--  <a th:href="@{/request/response(action=0 ,id=${request.getId()})}"><button class="btn">Elutasítás</button></a> -->
                     </div>
