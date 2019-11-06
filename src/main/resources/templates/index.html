@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{~/main/resources/static/css/index.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{~/index.css}">
 </head>
 <body>
 <div class = "jumbotron jumbotron-fluid">
@@ -28,13 +28,13 @@
 </div>
 <div class="container">
     <div class="left">
-        <img th:src="@{~/resources/static/img/robot2.svg}" id="robot">
+        <img th:src="@{/static/img/robot2.svg}" id="robot">
     </div>
     <div class="right">
         <img th:src="@{../resources/static/img/person.svg}" id="person">
     </div>
     <div class="msg">
-        <img src="./static/img/msg.svg" id="msg">
+        <img src="/../../static/img/msg.svg" id="msg">
     </div>
 
 </div>
