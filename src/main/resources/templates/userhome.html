@@ -90,7 +90,7 @@
                 <td th:text="${request.getType()}"></td>
                 <td th:text="${request.getStart_date()}"></td>
                 <td th:text="${request.getEnd_date()}"></td>
-                <td th:appclass="status${request.getStatus()}" th:text="${request.getStatus()}"></td>
+                <td th:class="status${request.getStatus()}" th:text="${request.getStatus()}"></td>
                 <td>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <form th:action="@{/request/response}" method="post">
