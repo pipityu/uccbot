@@ -59,10 +59,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] staticResources = {"/resources/**","/css/**","/img/**","/js/**", "/webjars/**","/assets/**"}
+        String[] staticResources = {"/resources/**","/css/**","/img/**","/js/**", "/webjars/**","/assets/**"};
         http
                 .authorizeRequests()
-                .antMatchers().permitAll()
+                .antMatchers(staticResources).permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
