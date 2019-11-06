@@ -12,7 +12,6 @@ delete from  requests;
 
 INSERT INTO roles (id, name) VALUES
 (1, 'ROLE_ADMIN'),
---(2, 'ROLE_ACTUATOR'),
 (2, 'ROLE_USER');
 
 INSERT INTO requests(id, username, type, start_date, end_date, status, name, manychat_id)  VALUES

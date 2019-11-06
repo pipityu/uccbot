@@ -1,0 +1,49 @@
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    background-color: black;
+}
+
+.welcomeText{
+    font-weight: bolder;
+    text-align: center;
+}
+
+#indexBtn{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    width: 30%;
+}
+
+.container{
+    margin-top: 10%;
+    width: 70%;
+    height: auto;
+    overflow: auto;
+}
+ .container img{
+    max-height: 100%;
+    max-width: 100%;
+}
+ .left{
+     width: 30%;
+     float: left;
+ }
+ .right{
+     overflow: auto;
+     width: 30%;
+     padding-top: 3%;
+     float: right;
+ }
+ .msg{
+     margin-top: 5%;
+     float: left;
+     width: 10%;
+ }
+
+ .statusElfogadva{
+     color: forestgreen;
+ }

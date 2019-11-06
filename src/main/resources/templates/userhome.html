@@ -29,12 +29,12 @@
                 <li class="nav-item"><a class="nav-link" href="#">linkek</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">linkek</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">linkek</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Log Out</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Kijelentkezés</a></li>
             </ul>
             <form method="post">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown"><a class=" btn dropdown-toggle nav-link"
-                                            id="dropdown" data-toggle="dropdown">Personal</a>
+                                            id="dropdown" data-toggle="dropdown">Személyes</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="#">Profile</a> <a
                                 class="dropdown-item"><input class="btn" type="submit"
@@ -49,28 +49,22 @@
 </div>
 <div>
     <p>
-        Welcome <span sec:authentication="principal.username">User</span>
+        Üdvözöllek <span sec:authentication="principal.username"></span>
     </p>
 </div>
 <div sec:authorize="hasRole('ROLE_ADMIN')">
-    <h3>You will see this only if you are ADMIN</h3>
+    <h3>Ezt csak az admin látja</h3>
     <p>
         <a href="/admin/home">Admin Home</a>
     </p>
 </div>
 
 
-<!-- ELŐKÉSZÍTETT KÉRELEM NEM KELL EZ ELÉG ÖSSZEGEZNI A CHATBOTBAN!!! -->
 <!-- ELÉG CSAK A DB-BŐL FRISSÍTENI A KÉRELMET!! STÁTUSZ ZÖLD PIROS -->
 
-<!--
-<div>
-    <a th:href="@{/request(accept=1)}"><button class="btn">Kérelem küldése</button></a>
-</div>
--->
 
 <div>
-    <p>Kérelem</p><a th:href="@{/request/check}"><button class="btn">Frissítés</button></a>
+    <p>Kérelem</p><a th:href="@{/request/check}"><button class="btn btn-primary">Frissítés</button></a>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -96,7 +90,7 @@
                 <td th:text="${request.getType()}"></td>
                 <td th:text="${request.getStart_date()}"></td>
                 <td th:text="${request.getEnd_date()}"></td>
-                <td th:text="${request.getStatus()}"></td>
+                <td th:appclass="status${request.getStatus()}" th:text="${request.getStatus()}"></td>
                 <td>
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <form th:action="@{/request/response}" method="post">
@@ -104,14 +98,9 @@
                             <input class="btn" type="submit" name="action" th:value="Elutasítás">
                             <input class="btn" type="submit" name="action" th:value="Elfogadás">
                         </form>
-                      <!--  <a th:href="@{/request/response(action=0 ,id=${request.getId()})}"><button class="btn">Elutasítás</button></a> -->
                     </div>
                 </td>
-<!--                <td>
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
-                        <a th:href="@{/request/response(action=1 ,id=${request.getId()})}"><button class="btn">Elfogadás</button></a>
-                    </div>
-                </td>-->
+
             </tr>
         </th:block>
         </tbody>

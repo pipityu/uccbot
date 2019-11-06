@@ -78,10 +78,6 @@ public class HomeController {
         JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
 
-        String zero = jsonArr.getJSONObject(0).getString("name");
-        String one = jsonArr.getJSONObject(1).getString("name");
-        String two = jsonArr.getJSONObject(2).getString("name");
-        String three = jsonArr.getJSONObject(3).getString("name");
 
 
         for(int i = 0; i<4; i++){

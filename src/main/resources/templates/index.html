@@ -3,13 +3,41 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>Home</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
 </head>
 <body>
-<div>
+<div class = "jumbotron jumbotron-fluid">
+    <div>
+        <h1 class="welcomeText"><strong>UCCBOT</strong></h1></br>
+        <h3 class="welcomeText">Szabadság és Táppénz igénylő rendszer</h3></br>
 
-    <p><a href="/login">login</a><p>
-    <p><a href="/login">login</a><p>
+        <div id="indexBtn">
+            <a class="btn btn-success btn-block" href="/login">Bejelentkezés</a>
+            <a class="btn btn-primary btn-block" href="#">Regisztráció</a>
+        </div>
+
+    </div>
+
 </div>
+<div class="container">
+    <div class="left">
+        <img src="../static/img/robot2.svg" id="robot">
+    </div>
+    <div class="right">
+        <img src="../static/img/girl.svg" id="person">
+    </div>
+    <div class="msg">
+        <img src="../static/img/msg.svg" id="msg">
+    </div>
+
+</div>
+
 </body>
 </html>
