@@ -4,10 +4,14 @@
 
 <head>
     <title>Log in</title>
+    <link th:href="@{/css/base.css}" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div>
-            <div>Login Form</div>
+    <div class = "jumbotron jumbotron-fluid">
+        <div>
+            <h1 class="welcomeText"><strong>Jelentkezz Be!</strong></h1></br>
+        </div>
             <div>
                 <form name="loginform" th:action="@{/login}" action="login" method="post">
                     <div>
@@ -24,14 +28,14 @@
                     </div>-->
                     <div>
                         <div>
-                            <button type="submit">LogIn</button>
+                            <button type="submit">Bejelentkezés</button>
                         </div>
                     </div>
                     <div>
                         <div>
-                            <div th:if="${param.error}">
+                            <div id="loginerror" th:if="${param.error}">
                                 <p>
-                                    <span>Invalid Email or Password.</span>
+                                    <span>Érvénytelen jelszó vagy felhasználónév</span>
                                 </p>
                             </div>
                             <div th:if="${param.logout}">
