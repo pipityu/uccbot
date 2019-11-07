@@ -9,8 +9,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @Service
+@Transactional
 public class RequestService {
 
     @Autowired
@@ -23,7 +23,6 @@ public class RequestService {
     public Request findRequestByUserName(String username){return reqrepo.findByUserName(username);}
 
     public Optional<Request> findRequestById(int id){return reqrepo.findById(id);}
-
 
     public void saveRequest(Request request){
         reqrepo.save(request);

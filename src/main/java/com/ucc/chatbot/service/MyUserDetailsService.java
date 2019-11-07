@@ -21,10 +21,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 
-
-    //itt felülírjuk a UserDetailsService egyetlen metódusát. Ha nincs meg a user akkor exception
-    // ha megvan akkor visszatér az emaillel passwordel és szerepkörökkel
-    @Override//felhasználók kikeresésének a módja
+    @Override  //Felhasználó adatai Spring Securitynek
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("Email: " + userName + " not found"));
@@ -33,13 +30,14 @@ public class MyUserDetailsService implements UserDetailsService {
                 getAuthorities(user));
     }
 
-    //Ez talán kiszedi vagyis kikeresi a jogokat a megtalált felhasználóból(amikkel rendelkezik)
+    //Jogok kikeresése
     private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
         String[] userRoles = user.getRoles().stream().map((role) -> role.getName()).toArray(String[]::new);
         Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);
         return authorities;
     }
 
+    //Felhasználó adati mert Controllerben kell a teljes név
     public User loadUser(String userName) throws UsernameNotFoundException{
         User user = userRepository.findByEmail(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("Email: " + userName + " not found"));
