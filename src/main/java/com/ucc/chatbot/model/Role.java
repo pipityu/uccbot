@@ -10,7 +10,6 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private String name;
 
     @ManyToMany(mappedBy = "roles")

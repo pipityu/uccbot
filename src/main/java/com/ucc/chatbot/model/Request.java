@@ -9,7 +9,6 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private String username;
     private String name;
     private String type;
@@ -17,7 +16,6 @@ public class Request {
     private String end_date;
     private String status;
     private String manychat_id;
-
 
     public Request(){}
 

@@ -24,13 +24,11 @@ public class RequestController {
     private String API_TOKEN = "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6";
     private String manyChatID = "null";
 
-
     private String type = "null";
     private String startDate = "null";
     private String endDate = "null";
     private String status = "null";
     private String msg = "Elfogadva";
-
 
     HttpHeaders headers = new HttpHeaders();
     {
@@ -76,7 +74,6 @@ public class RequestController {
             }
         }
 
-
         if(admin){
             model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
         } else {
@@ -84,11 +81,13 @@ public class RequestController {
                 model.addAttribute("saved", "Hiba!");
                 return "forward:/request/check";
             }
+
             Request request = new Request(principal.getName(), name, type, startDate, endDate, status, manyChatID);
 
             if(type.compareTo(TP) == 0){
                 request.setStatus("Elfogadva");
             }
+
             if (reqservice.findRequestByUserName(principal.getName()) == null) {
                 reqservice.saveRequest(request);
                 model.addAttribute("saved", "Mentve");
@@ -116,22 +115,20 @@ public class RequestController {
             model.addAttribute("allRequest", reqArr);
 
         }else{
-            //1DB request a felhasználónév alapján
             Request request = reqservice.findRequestByUserName(principal.getName());
             model.addAttribute("allRequest", request);
         }
-
         return "userhome";
     }
 
-    //action = formról beérkező adat(elutasítás vagy elfogadás)
-    //id = szintén a formról a request id-ja
+
     @PostMapping("/request/response")
     public String response(@RequestParam String action, @RequestParam String requestId) {
         int id = Integer.parseInt(requestId);
-        Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
-        Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
+        Optional<Request> request = reqservice.findRequestById(id);
+        Request r = request.get();
         msg = "Kérelmed "+action+"-ra került";
+
         if(action.compareTo("Elutasítás") == 0){
             reqservice.deleteRequest(id);
         }
@@ -139,13 +136,11 @@ public class RequestController {
             r.setStatus("Elfogadva");
             reqservice.updateRequest(r);
         }
+
         String jsonSendMessage = "{   \"subscriber_id\":"+r.getManychat_id()+",\"data\":{\"version\":\"v2\",\"content\":{\"messages\":[{\"type\":\"text\",\"text\":\""+msg+"\"}]}}}";
         String theUrl = "https://api.manychat.com/fb/sending/sendContent";
         HttpEntity<String> entity = new HttpEntity<>(jsonSendMessage, headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.POST, entity, String.class);
         return "forward:/request/check";
     }
-
-      /*redirect will respond with a 302 and the new URL in the Location header; the browser/client will then make another request to the new URL
-    forward happens entirely on a server side; the Servlet container forwards the same request to the target URL; the URL won't change in the browser*/
 }
