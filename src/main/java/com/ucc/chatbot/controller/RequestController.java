@@ -77,10 +77,10 @@ public class RequestController {
                 case "status" : status = addVal;
             }
         }*/
-        type = jsonArr.getJSONObject(0).getString("name");
-        startDate = jsonArr.getJSONObject(1).getString("name");
-        endDate = jsonArr.getJSONObject(3).getString("name");
-        status = jsonArr.getJSONObject(2).getString("name");
+        type = jsonArr.getJSONObject(0).getString("value");
+        startDate = jsonArr.getJSONObject(1).getString("value");
+        endDate = jsonArr.getJSONObject(3).getString("value");
+        status = jsonArr.getJSONObject(2).getString("value");
 
         if(admin){
             model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
