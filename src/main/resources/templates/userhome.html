@@ -77,8 +77,9 @@
                 <th>Státusz</th>
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <th>Válasz</th>
+                    <th>ChatID</th>
                 </div>
-                <th>ChatID</th>
+
 
             </tr>
         </thead>
@@ -92,16 +93,16 @@
                 <td th:text="${request.getStart_date()}"></td>
                 <td th:text="${request.getEnd_date()}"></td>
                 <td th:class="${request.getStatus()}" th:text="${request.getStatus()}"></td>
-                <td>
-                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <td>
                         <form th:action="@{/request/response}" method="post">
                             <input type="hidden" name="requestId" th:value="${request.getId()}">
                             <input class="btn btn-danger" type="submit" name="action" th:value="Elutasítás">
                             <input class="btn btn-success" type="submit" name="action" th:value="Elfogadás">
                         </form>
-                    </div>
-                </td>
-                <td th:text="${request.getManychat_id()}"></td>
+                    </td>
+                    <td th:text="${request.getManychat_id()}"></td>
+                </div>
             </tr>
         </th:block>
         </tbody>
