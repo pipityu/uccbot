@@ -15,17 +15,17 @@
     max-width: 100%;
 }
 .left{
-    width: 25%;
+    width: 35%;
     float: left;
 }
 .right{
     overflow: auto;
-    width: 20%;
+    width: 30%;
     padding-top: 3%;
     float: right;
 }
 .msg{
     margin-top: 5%;
-    float: left;
-    width: 10%;
+    float: right;
+    width: 15%;
 }

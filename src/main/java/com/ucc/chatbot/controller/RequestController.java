@@ -20,13 +20,11 @@ import java.util.Optional;
 @Controller
 public class RequestController {
     private String TP = "Táppénz";
-    private String LEAVE = "Szabadság";
     private String ADMIN_NAME = "Péter Nagy";
     private String API_TOKEN = "Bearer 105197630914532:ba342569ac0c5408909eee97f971b9a6";
     private String manyChatID = "null";
 
-    private String firstName = "null";
-    private String lastName = "null";
+
     private String type = "null";
     private String startDate = "null";
     private String endDate = "null";
@@ -61,7 +59,6 @@ public class RequestController {
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         ResponseEntity<String> response = restTemplate.exchange(theUrl, HttpMethod.GET, entity, String.class);
 
-        //Adatok kinyerése JSON-ból (data, custom_fields)
         JSONObject fulljson = new JSONObject(response.getBody()); //teljes json
         JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
         manyChatID = jsonArrData.getString("id");
@@ -113,7 +110,6 @@ public class RequestController {
         if (name.compareTo("Admin") == 0){
             admin = true;
         }
-
 
         if(admin){
             List<Request> reqArr = reqservice.listAllRequest();
