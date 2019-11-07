@@ -1,7 +1,6 @@
 package com.ucc.chatbot.repository;
 
 import com.ucc.chatbot.model.User;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

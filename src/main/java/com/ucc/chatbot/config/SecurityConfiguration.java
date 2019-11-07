@@ -45,12 +45,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder());
     }
 
-    /*@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
-    }*/
-
-
     PersistentTokenRepository persistentTokenRepository(){
         JdbcTokenRepositoryImpl tokenRepositoryImpl = new JdbcTokenRepositoryImpl();
         tokenRepositoryImpl.setDataSource(dataSource);
@@ -81,7 +75,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .permitAll()
                 .and()
                     .rememberMe()
-                        //.key("my-secure-key")
                         .rememberMeCookieName("my-remember-me-cookie")
                         .tokenRepository(persistentTokenRepository())
                         .tokenValiditySeconds(24 * 60 * 60)

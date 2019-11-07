@@ -18,8 +18,8 @@
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link th:href="@{/css/base.css}" rel="stylesheet" type="text/css" />
-    <link th:href="@{/css/home.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/base.css}" href="../static/css/base.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/home.css}" href="../static/css/home.css" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
@@ -31,6 +31,11 @@
                 <li class="nav-item"><a class="nav-link" href="#">link1</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">link2</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">link3</a></li>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li>
+                        <a class="nav-link" href="/admin/home">Admin Home</a>
+                    </li>
+                </div>
                 <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Kijelentkezés</a></li>
             </ul>
             <form method="post">
@@ -55,14 +60,11 @@
     <h2>Bejelentkezve mint: <strong><span sec:authentication="principal.username"></span></strong></h2>
     </p>
 </div>
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <h3>Ezt csak az admin látja</h3>
-    <p>
-        <a href="/admin/home">Admin Home</a>
-    </p>
+<hr>
+<div id="request" class="d-flex justify-content-center">
+    <h3>Kérelem</h3>
 </div>
 <div>
-    <p>Kérelem</p><a th:href="@{/request/check}"><button class="btn btn-primary">Frissítés</button></a>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -93,8 +95,8 @@
                     <div sec:authorize="hasRole('ROLE_ADMIN')">
                         <form th:action="@{/request/response}" method="post">
                             <input type="hidden" name="requestId" th:value="${request.getId()}">
-                            <input class="btn" type="submit" name="action" th:value="Elutasítás">
-                            <input class="btn" type="submit" name="action" th:value="Elfogadás">
+                            <input class="btn btn-danger" type="submit" name="action" th:value="Elutasítás">
+                            <input class="btn btn-success" type="submit" name="action" th:value="Elfogadás">
                         </form>
                     </div>
                 </td>
@@ -103,7 +105,14 @@
         </th:block>
         </tbody>
     </table>
-    <a th:href="@{/request/send}"><button onclick="responseText()" class="btn btn-success">Kérelem beküldése</button></a>
+    <div class="d-flex justify-content-start">
+        <div class="p-1">
+            <a th:href="@{/request/send}"><button onclick="responseText()" class="btn btn-success">Kérelem beküldése</button></a>
+        </div>
+        <div class="p-1">
+            <a th:href="@{/request/check}"><button class="btn btn-primary">Frissítés</button></a>
+        </div>
+    </div>
     <div class="homeText">
         <p id="requestResponse" th:text="${saved}"></p>
     </div>
