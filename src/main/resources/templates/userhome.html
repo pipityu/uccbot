@@ -26,14 +26,14 @@
 <div>
     <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
         <div class="container-fluid">
-            <a href="/welcome" class="navbar-brand font-weight-bolder">UCCBOT</a>
+            <a th:href="@{request/check}" class="navbar-brand font-weight-bolder">UCCBOT</a>
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="#">link1</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">link2</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">link3</a></li>
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <li>
-                        <a class="nav-link" href="/admin/home">Admin Home</a>
+                        <a class="nav-link" th:href="@{/admin/home}">Admin Oldal</a>
                     </li>
                 </div>
                 <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Kijelentkezés</a></li>
@@ -78,6 +78,7 @@
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
                     <th>Válasz</th>
                 </div>
+                <th>ChatID</th>
 
             </tr>
         </thead>
@@ -100,7 +101,7 @@
                         </form>
                     </div>
                 </td>
-
+                <td th:text="${request.getManychat_id()}"></td>
             </tr>
         </th:block>
         </tbody>

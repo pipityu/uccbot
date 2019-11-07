@@ -17,7 +17,15 @@
 
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link th:href="@{/css/base.css}" rel="stylesheet" type="text/css" />
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            min-height: 100%;
+            background-color: azure;
+        }
+    </style>
 
 </head>
 <body>
@@ -48,9 +56,7 @@
     </nav>
 </div>
 <div>
-    <p>Admin:(<span sec:authentication="principal.username"></span>)</p>
-    <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
+    <h1>Adminisztrátor oldala</h1>
 </div>
-<h1>Admin oldal</h1>
 </body>
 </html>
