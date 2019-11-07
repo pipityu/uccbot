@@ -3,8 +3,14 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Log in</title>
-    <link th:href="@{/css/base.css}" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <title>Bejelentkezés</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/base.css}" href="../static/css/base.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/login.css}" href="../static/css/login.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div>
@@ -12,41 +18,57 @@
         <div>
             <h1 class="welcomeText"><strong>Jelentkezz Be!</strong></h1></br>
         </div>
-            <div>
-                <form name="loginform" th:action="@{/login}" action="login" method="post">
-                    <div>
-                        <input type="email"  name="username" placeholder="Email" />
-                    </div>
-                    <div>
-                        <input type="password"  name="password" placeholder="Password" />
-                    </div>
 
-                    <!--<div class="form-group">
-                        <label>
-                            <input type="checkbox" name="remember-me"> Remember Me
-                        </label>
-                    </div>-->
+        <div class = "d-flex justify-content-center p-3 text-white">
+            <div>
+            <form name="loginform" class="form-group" th:action="@{/login}" action="login" method="post">
+                <div class="p-2 bg-dark">
+                    <label>Felhasználónév</label><input class="form-control" type="email"  name="username" placeholder="Email" />
+                </div>
+                <div class="p-2 bg-dark">
+                    <label>Jelszó</label><input class="form-control" type="password"  name="password" placeholder="Password" />
+                </div>
+                <div>
                     <div>
-                        <div>
-                            <button type="submit">Bejelentkezés</button>
-                        </div>
+                        <button class="btn btn-success" name="login" type="submit">Bejelentkezés</button>
+                        <button class="btn btn-info" name="forgotpassword" type="submit" formaction="#">Elfelejtett jelszó</button>
                     </div>
                     <div>
-                        <div>
-                            <div id="loginerror" th:if="${param.error}">
-                                <p>
-                                    <span>Érvénytelen jelszó vagy felhasználónév</span>
-                                </p>
-                            </div>
-                            <div th:if="${param.logout}">
-                                <p>
-                                    <span>You have been logged out.</span>
-                                </p>
-                            </div>
+
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div id="loginerror" th:if="${param.error}">
+                            <p>
+                                <span>Érvénytelen jelszó vagy felhasználónév</span>
+                            </p>
+                        </div>
+                        <div id="successLogOut" th:if="${param.logout}">
+                            <p>
+                                <span>Sikeresen kijelentkeztél</span>
+                            </p>
                         </div>
                     </div>
-                </form>
+                </div>
+            </form>
             </div>
+        </div>
+
+    </div>
+    <div class="container">
+        <div class="left">
+            <img th:src="@{/img/robot1.svg}" src="../static/img/robot1.png" id="robot">
+        </div>
+        <div class="right">
+            <img th:src="@{/img/calendar.svg}" src="../static/img/calendar.svg" id="calendar">
+        </div>
+        <div class="right">
+            <img th:src="@{/img/girl2.svg}" src="../static/img/girl2.svg" id="girl2">
+        </div>
+
+    </div>
+
 </div>
 </body>
 </html>

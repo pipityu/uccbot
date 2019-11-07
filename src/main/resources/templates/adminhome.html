@@ -5,15 +5,52 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       layout:decorator="layout">
 <head>
-    <title>Admin Home</title>
+    <title>Admin</title>
+    <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- ManyChat -->
+    <script src="//widget.manychat.com/105197630914532.js" async="async"></script>
+
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link th:href="@{/css/base.css}" rel="stylesheet" type="text/css" />
 
 </head>
 <body>
-<div layout:fragment="content">
-    <p>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</p>
+<div>
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+        <div class="container-fluid">
+            <a href="/welcome" class="navbar-brand font-weight-bolder">UCCBOT</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#">link1</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">link2</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">link3</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Kijelentkezés</a></li>
+            </ul>
+            <form method="post">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown"><a class=" btn dropdown-toggle nav-link"
+                                            id="dropdown" data-toggle="dropdown">Személyes</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Profile</a> <a
+                                class="dropdown-item"><input class="btn" type="submit"
+                                                             formaction="#" value="link"></a> <a class="dropdown-item"><input
+                                class="btn" type="submit" formaction="" value="link"></a>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </nav>
+</div>
+<div>
+    <p>Admin:(<span sec:authentication="principal.username"></span>)</p>
     <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
 </div>
-<h1>This is admin home page</h1>
+<h1>Admin oldal</h1>
 </body>
 </html>

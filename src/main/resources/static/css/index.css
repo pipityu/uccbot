@@ -12,24 +12,24 @@
     height: auto;
     overflow: auto;
 }
- .container img{
+.container img{
     max-height: 100%;
     max-width: 100%;
 }
- .left{
-     width: 30%;
-     float: left;
- }
- .right{
-     overflow: auto;
-     width: 30%;
-     padding-top: 3%;
-     float: right;
- }
- .msg{
-     margin-top: 5%;
-     float: left;
-     width: 10%;
- }
+.left{
+    width: 30%;
+    float: left;
+}
+.right{
+    overflow: auto;
+    width: 30%;
+    padding-top: 3%;
+    float: right;
+}
+.msg{
+    margin-top: 5%;
+    float: left;
+    width: 10%;
+}
 
 

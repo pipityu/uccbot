@@ -5,7 +5,7 @@
 
 <head>
 
-    <title>User Home</title>
+    <title>Kérvényező</title>
     <meta charset="utf-8" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -28,9 +28,9 @@
         <div class="container-fluid">
             <a href="/welcome" class="navbar-brand font-weight-bolder">UCCBOT</a>
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#">linkek</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">linkek</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">linkek</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">link1</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">link2</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">link3</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Kijelentkezés</a></li>
             </ul>
             <form method="post">
@@ -49,9 +49,10 @@
         </div>
     </nav>
 </div>
+
 <div>
     <p>
-        Üdvözöllek <span sec:authentication="principal.username"></span>
+    <h2>Bejelentkezve mint: <strong><span sec:authentication="principal.username"></span></strong></h2>
     </p>
 </div>
 <div sec:authorize="hasRole('ROLE_ADMIN')">
@@ -60,11 +61,6 @@
         <a href="/admin/home">Admin Home</a>
     </p>
 </div>
-
-
-<!-- ELÉG CSAK A DB-BŐL FRISSÍTENI A KÉRELMET!! STÁTUSZ ZÖLD PIROS -->
-
-
 <div>
     <p>Kérelem</p><a th:href="@{/request/check}"><button class="btn btn-primary">Frissítés</button></a>
     <table class="table table-hover">
@@ -107,7 +103,7 @@
         </th:block>
         </tbody>
     </table>
-    <a th:href="@{/request/send}"><button onclick="" class="btn btn-success">Kérelem beküldése</button></a>
+    <a th:href="@{/request/send}"><button onclick="responseText()" class="btn btn-success">Kérelem beküldése</button></a>
     <div class="homeText">
         <p id="requestResponse" th:text="${saved}"></p>
     </div>
