@@ -23,10 +23,10 @@
             <div>
             <form name="loginform" class="form-group" th:action="@{/login}" action="login" method="post">
                 <div class="p-2 bg-dark">
-                    <label>Felhasználónév</label><input class="form-control" type="email"  name="username" placeholder="Email" />
+                    <label>Felhasználónév</label><input class="form-control" type="email" required  name="username" placeholder="Email" />
                 </div>
                 <div class="p-2 bg-dark">
-                    <label>Jelszó</label><input class="form-control" type="password"  name="password" placeholder="Password" />
+                    <label>Jelszó</label><input class="form-control" type="password" required  name="password" placeholder="Password" />
                 </div>
                 <div>
                     <div>
@@ -58,7 +58,7 @@
     </div>
     <div class="container">
         <div class="left">
-            <img th:src="@{/img/robot1.svg}" src="../static/img/robot1.png" id="robot">
+            <img th:src="@{/img/robot1.png}" src="../static/img/robot1.png" id="robot">
         </div>
         <div class="right">
             <img th:src="@{/img/calendar.svg}" src="../static/img/calendar.svg" id="calendar">

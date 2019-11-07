@@ -74,13 +74,17 @@ public class RequestController {
                 case "choice" : type = addVal;
                 case "startDate" : startDate = addVal;
                 case "endDate" : endDate = addVal;
-                case "status" : startDate = addVal;
+                case "status" : status = addVal;
             }
         }
 
         if(admin){
             model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
         } else {
+            if(status.equals("null")){
+                model.addAttribute("saved", "Hiba!");
+                return "forward:/request/check";
+            }
             Request request = new Request(principal.getName(), name, type, startDate, endDate, status, manyChatID);
 
             if(type.compareTo(TP) == 0){
@@ -129,7 +133,7 @@ public class RequestController {
         int id = Integer.parseInt(requestId);
         Optional<Request> request = reqservice.findRequestById(id);     //OPTIONAL egy generikus tároló 0,1 értékekkel ami azt nézi hogy létezik e az elem(hibakezelésre szolgál)
         Request r = request.get();      //get() ha létezik az elem akkor visszaadja az értékét ha nem akkor NoSuchElementException-t dob
-        msg = action;
+        msg = "Kérelmed "+action+"-ra került";
         if(action.compareTo("Elutasítás") == 0){
             reqservice.deleteRequest(id);
         }
