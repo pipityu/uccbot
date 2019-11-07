@@ -67,7 +67,7 @@ public class RequestController {
         JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
 
 
-        for(int i = 0; i<4; i++){
+        /*for(int i = 0; i<4; i++){
             String val = jsonArr.getJSONObject(i).getString("name");
             String addVal = jsonArr.getJSONObject(i).getString("value");
             switch(val){
@@ -76,7 +76,11 @@ public class RequestController {
                 case "endDate" : endDate = addVal;
                 case "status" : status = addVal;
             }
-        }
+        }*/
+        type = jsonArr.getJSONObject(0).getString("name");
+        startDate = jsonArr.getJSONObject(1).getString("name");
+        endDate = jsonArr.getJSONObject(3).getString("name");
+        status = jsonArr.getJSONObject(2).getString("name");
 
         if(admin){
             model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
