@@ -66,21 +66,18 @@ public class RequestController {
         JSONObject jsonArrData = fulljson.getJSONArray("data").getJSONObject(0); //data obj (amiben van ar array)
         JSONArray jsonArr = jsonArrData.getJSONArray("custom_fields"); //ez lenne az array[]
 
-
-        /*for(int i = 0; i<4; i++){
-            String val = jsonArr.getJSONObject(i).getString("name");
-            String addVal = jsonArr.getJSONObject(i).getString("value");
+        String val,addVal ="";
+        for(int i = 0; i<4; i++){
+            val = jsonArr.getJSONObject(i).getString("name");
+            addVal = jsonArr.getJSONObject(i).getString("value");
             switch(val){
-                case "choice" : type = addVal;
-                case "startDate" : startDate = addVal;
-                case "endDate" : endDate = addVal;
-                case "status" : status = addVal;
+                case "choice" : type = addVal; break;
+                case "startDate" : startDate = addVal; break;
+                case "endDate" : endDate = addVal; break;
+                case "status" : status = addVal; break;
             }
-        }*/
-        type = jsonArr.getJSONObject(0).getString("value");
-        startDate = jsonArr.getJSONObject(1).getString("value");
-        endDate = jsonArr.getJSONObject(3).getString("value");
-        status = jsonArr.getJSONObject(2).getString("value");
+        }
+
 
         if(admin){
             model.addAttribute("saved", "Admin vagy, neked nem kell kérelmet küldeni");
