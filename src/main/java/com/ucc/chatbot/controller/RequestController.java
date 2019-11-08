@@ -127,7 +127,7 @@ public class RequestController {
         int id = Integer.parseInt(requestId);
         Optional<Request> request = reqservice.findRequestById(id);
         Request r = request.get();
-        msg = "Kérelmed "+action+"-ra került";
+        msg = "Benyújtott kérelmed "+action+"ra került";
 
         if(action.compareTo("Elutasítás") == 0){
             reqservice.deleteRequest(id);
